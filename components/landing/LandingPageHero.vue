@@ -41,7 +41,8 @@
               </p>
             </div>
             <div class="md:w-1/2">
-              <img src="/images/innovative-solutions.jpg" alt="Innovative Solutions" class="w-full h-auto rounded-lg shadow-lg">
+              <!-- <img src="/images/tech.jpg" alt="Innovative Solutions" class="w-full h-auto rounded-lg shadow-lg"> -->
+              <div class="w-full h-64 bg-gray-300 rounded-lg shadow-lg"></div>
             </div>
           </div>
 
@@ -54,7 +55,8 @@
               </p>
             </div>
             <div class="md:w-1/2">
-              <img src="/images/customer-centric.jpg" alt="Customer-Centric Approach" class="w-full h-auto rounded-lg shadow-lg">
+              <!-- <img src="/images/welcomeff.png" alt="Customer-Centric Approach" class="w-full h-auto rounded-lg shadow-lg"> -->
+              <div class="w-full h-64 bg-gray-300 rounded-lg shadow-lg"></div>
             </div>
           </div>
 
@@ -67,7 +69,8 @@
               </p>
             </div>
             <div class="md:w-1/2">
-              <img src="/images/sustainable-future.jpg" alt="Sustainable Future" class="w-full h-auto rounded-lg shadow-lg">
+              <!-- <img src="/images/welcomeff.png" alt="Sustainable Future" class="w-full h-auto rounded-lg shadow-lg"> -->
+              <div class="w-full h-64 bg-gray-300 rounded-lg shadow-lg"></div>
             </div>
           </div>
         </UContainer>
@@ -84,7 +87,8 @@
               <h3 class="text-2xl font-bold mb-2 text-blue-600 dark:text-blue-400">{{ product.title }}</h3>
             </template>
             <div class="h-40 mb-4">
-              <img :src="product.image" :alt="product.title" class="w-full h-full object-cover rounded-lg" />
+              <!-- <img :src="product.image" :alt="product.title" class="w-full h-full object-cover rounded-lg" /> -->
+              <div class="w-full h-full bg-gray-300 rounded-lg"></div>
             </div>
             <p class="text-gray-600 dark:text-gray-400">
               {{ product.description }}
@@ -191,7 +195,7 @@ const products = [
   },
   {
     title: "great tech wizard",
-    image: "/images/wearable-tech.jpg",
+    image: "/images/wearable-/images/welcomeff.png",
     description: "Stay connected and monitor your health with our cutting-edge wearables.",
     link: "/products/wearables"
   }
