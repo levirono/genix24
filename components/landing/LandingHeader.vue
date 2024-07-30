@@ -8,18 +8,18 @@
             <span class="text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">{{ link.label }}</span>
           </template>
         </UHorizontalNavigation>
-        <button @click="$emit('toggle-theme')" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+        <!-- <button @click="$emit('toggle-theme')" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
           <span v-if="isDark" class="text-yellow-500">🌞</span>
           <span v-else class="text-gray-900">🌙</span>
-        </button>
+        </button> -->
       </div>
     </div>
   </header>
 </template>
 
 <script setup>
-defineProps(['isDark']);
-defineEmits(['toggle-theme']);
+// defineProps(['isDark']);
+// defineEmits(['toggle-theme']);
 
 const navigationLinks = [
   { label: 'Home', to: '#home' },
