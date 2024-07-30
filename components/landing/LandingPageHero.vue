@@ -9,7 +9,7 @@
       </p>
       <UButton
         to="/about"
-        class="glassmorphism"
+        class=""
         color="blue"
         size="xl"
         trailing-icon="i-heroicons-arrow-right-20-solid"

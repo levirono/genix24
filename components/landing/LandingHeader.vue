@@ -1,33 +1,52 @@
 <template>
-  <header class="py-4 px-4 md:px-8">
-    <div class="flex justify-between items-center">
-      <div class="text-2xl font-bold text-white">Genixl</div>
+  <div>
+    <header v-if="!isMobile" class="py-4 px-4 md:px-8 bg-white dark:bg-gray-800">
+      <div class="flex justify-between items-center">
+        <div class="text-2xl font-bold text-gray-800 dark:text-white">Genixl</div>
+        <UHorizontalNavigation :links="navigationLinks" class="justify-center">
+          <template #default="{ link }">
+            <span class="text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">{{ link.label }}</span>
+          </template>
+        </UHorizontalNavigation>
+      </div>
+    </header>
+
+    <header v-else class="py-4 px-4 bg-white dark:bg-gray-800 flex justify-between items-center">
+      <div class="text-2xl font-bold text-gray-800 dark:text-white">Genixl</div>
       <UButton
-        v-if="isMobile"
         @click="toggleMenu"
         color="gray"
         variant="ghost"
         icon="i-heroicons-bars-3"
       />
-      <UHorizontalNavigation v-else :links="navigationLinks" class="justify-center">
-        <template #default="{ link }">
-          <span class="text-lg font-medium text-white">{{ link.label }}</span>
-        </template>
-      </UHorizontalNavigation>
-    </div>
-    <UVerticalNavigation
-      v-if="isMobile && isMenuOpen"
-      :links="navigationLinks"
-      class="mt-4 bg-gradient-to-b from-gray-700 to-gray-900 p-4 rounded-lg shadow-lg"
-    >
-      <template #default="{ link }">
-        <span class="text-lg font-medium text-white hover:bg-gray-600 p-2 rounded block transition duration-300">
-          <i class="fas fa-chevron-right mr-2"></i>
-          {{ link.label }}
-        </span>
-      </template>
-    </UVerticalNavigation>
-  </header>
+    </header>
+
+    <Transition name="fade">
+      <aside v-if="isMobile && isMenuOpen" class="w-64 bg-white dark:bg-blue-600 h-screen fixed left-0 top-0 z-50 overflow-y-auto">
+        <div class="py-4 px-6">
+          <div class="flex justify-between items-center mb-6">
+            <div class="text-2xl font-bold text-gray-800 dark:text-white">Genixl</div>
+            <UButton
+              @click="toggleMenu"
+              color="gray"
+              variant="ghost"
+              icon="i-heroicons-x-mark"
+              class="text-gray-700 dark:text-gray-300"
+            />
+          </div>
+          <UVerticalNavigation :links="navigationLinks" class="bg-transparent">
+    <template #default="{ link }">
+      <span class="block py-2 px-4 text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">{{ link.label }}</span>
+    </template>
+  </UVerticalNavigation>
+        </div>
+      </aside>
+    </Transition>
+
+    <main :class="{ 'ml-64': !isMobile }">
+      <!-- Main content goes here -->
+    </main>
+  </div>
 </template>
 
 <script setup>
@@ -47,6 +66,9 @@ const isMenuOpen = ref(false);
 
 const checkMobile = () => {
   isMobile.value = window.innerWidth < 768;
+  if (!isMobile.value) {
+    isMenuOpen.value = false;
+  }
 };
 
 const toggleMenu = () => {
