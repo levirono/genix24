@@ -1,5 +1,5 @@
 <template>
-    <section id="about-us" class="space-y-8">
+    <section id="about" class="space-y-8">
       <UCard>
         <template #header>
           <h2 class="text-2xl font-bold">Our Core Values</h2>

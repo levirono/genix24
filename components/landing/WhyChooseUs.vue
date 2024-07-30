@@ -1,5 +1,5 @@
 <template>
-    <section id="why-choose-us" class="mt-20">
+    <section id="about-us" class="mt-20">
       <h2 class="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-red-500">
         Why Choose Us?
       </h2>
