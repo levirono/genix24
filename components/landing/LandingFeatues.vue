@@ -9,7 +9,7 @@
           </p>
         </div>
         <div class="md:w-1/2">
-          <img :src="feature.image" :alt="feature.title" class="w-full h-full object-cover rounded-lg shadow-lg" />
+          <img :src="feature.image" :alt="feature.title" class="w-50 h-50 object-cover rounded-lg shadow-lg" />
         </div>
       </div>
     </UContainer>
