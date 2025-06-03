@@ -1,8 +1,6 @@
 <template>
     <div class="min-h-screen flex flex-col bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 dark:text-gray-200">
-      <Header />
       <main class="flex-1 px-4 py-12 md:px-8">
-        <LandingHeader/>
         <LandingPageHero />
         <LandingFeatues />
         <LandingProducts />
