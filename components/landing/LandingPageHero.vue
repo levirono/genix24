@@ -2,7 +2,7 @@
   <section id="home" class="flex justify-center items-center h-auto mt-20 md:mt-40">
     <div class="max-w-4xl text-center">
       <h1 class="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500">
-        Empowering You with Innovative Solutions
+        Empowering You with Innovative Solutions.
       </h1>
       <p class="text-xl mb-8 text-gray-600 dark:text-gray-400">
         At Genixl, we are passionate about driving innovation in the world of technology. Our team is dedicated to
