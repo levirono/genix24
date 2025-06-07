@@ -31,7 +31,7 @@
     {
       icon: "🏢",
       title: "Office",
-      description: "Visit us at Eldoret,Eldoret City"
+      description: "Visit us at Eldoret, Eldoret City"
     }
   ];
   
