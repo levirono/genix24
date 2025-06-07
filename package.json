@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxt build -- output .nuxt/dist",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -24,4 +24,5 @@
   "imports": {
     "#internal/nuxt/paths": "./.nuxt/dist/paths.mjs"
   }
+
 }
