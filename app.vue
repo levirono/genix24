@@ -1,8 +1,10 @@
 <template>
   <div>
     <LandingHeader />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <NuxtPage />
   </div>
 </template>
+
+<script setup>
+// App level setup
+</script>

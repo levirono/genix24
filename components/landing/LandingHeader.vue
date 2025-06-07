@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center">
       <div class="text-2xl font-bold text-gray-800 dark:text-white">Genixl</div>
       <div class="flex items-center">
-        <UHorizontalNavigation :links="navigationLinks" class="justify-center mr-4">
+        <UHorizontalNavigation :links="navigationLinks" class="justify-center mr-4">                                                
           <template #default="{ link }">
             <span
               class="text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">{{
@@ -33,11 +33,13 @@ import { ref, onMounted } from 'vue';
 const user = ref(null);
 
 onMounted(() => {
-  if (process.client) {
+  try {
     const userData = localStorage.getItem('user');
     if (userData) {
       user.value = JSON.parse(userData);
     }
+  } catch (error) {
+    console.error('Error accessing localStorage:', error);
   }
 });
 

@@ -17,4 +17,17 @@ export default defineNuxtConfig({
       supabaseAnonKey: process.env.NUXT_SUPABASE_ANON_KEY,
     }
   },
+  app: {
+    head: {
+      title: 'Genixl',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+      ]
+    }
+  },
+  ssr: true,
+  nitro: {
+    preset: 'node-server'
+  }
 })

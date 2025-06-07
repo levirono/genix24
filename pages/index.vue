@@ -4,7 +4,7 @@
         <LandingPageHero />
         <LandingFeatues />
         <LandingProducts />
-        <LandingWhyChooseUs />
+        <WhyChooseUs />
         <LandingAboutUs />
         <LandingContactUs/>
       </main>
