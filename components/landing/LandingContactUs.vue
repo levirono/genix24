@@ -31,7 +31,7 @@
     {
       icon: "🏢",
       title: "Office",
-      description: "Visit us at 123 Tech Street, Innovation City"
+      description: "Visit us at Eldoret,Eldoret City"
     }
   ];
   

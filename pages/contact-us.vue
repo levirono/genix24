@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen flex flex-col items-center justify-center dark:bg-gray-900 bg-white">
+    <div class="min-h-screen flex flex-col items-center justify-center dark:bg-gray-900 bg-gray-50 py-16 px-4">
         <h1 class="text-4xl font-bold mb-4 dark:text-white text-gray-900">Contact Us</h1>
         <p class="mb-8 dark:text-gray-300 text-gray-700">We'd love to hear from you! Please fill out the form below.</p>
         <form class="w-full max-w-lg bg-white dark:bg-gray-800 p-8 rounded shadow" @submit.prevent="submitForm">
