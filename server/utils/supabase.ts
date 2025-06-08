@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.  NUXT_SUPABASE_URL
+const supabaseUrl = process.env.NUXT_SUPABASE_URL
 const supabaseKey = process.env.NUXT_SUPABASE_ANON_KEY
 
 if (!supabaseUrl || !supabaseKey) {
