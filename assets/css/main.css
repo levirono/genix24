@@ -5,3 +5,12 @@
 body {
     transition: background-color 0.3s, color 0.3s;
   }
+
+@media (max-width: 640px) {
+  html {
+    font-size: 8px; /* Reduce base font size for small screens */
+  }
+  body {
+    font-size: 1rem; /* Ensure body text is also smaller */
+  }
+}
