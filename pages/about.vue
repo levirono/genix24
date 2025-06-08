@@ -16,11 +16,11 @@
         </p>
         <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-emerald-400">What We Offer</h2>
         <ul class="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
-          <li>Custom software development tailored to your business needs</li>
-          <li>Cutting-edge SaaS products for productivity and collaboration</li>
+          <li>Custom software development tailored to your business needs.</li>
+          <li>Cutting-edge SaaS products for productivity and collaboration.</li>
           <li>Mobile and web app solutions with seamless user experiences</li>
-          <li>Consulting and digital transformation services</li>
-          <li>Ongoing support and partnership for your digital journey</li>
+          <li>Consulting and digital transformation services.</li>
+          <li>Ongoing support and partnership for your digital journey.</li>
         </ul>
       </div>
       <div>
