@@ -3,12 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build -- output .nuxt/dist ",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "dev:host": "nuxt --hostname 0.0.0.0 --port 8000"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/ui": "^2.17.0",
