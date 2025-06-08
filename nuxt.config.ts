@@ -26,8 +26,8 @@ export default defineNuxtConfig({
       ]
     }
   },
-  ssr: true,
-  nitro: {
-    preset: 'node-server'
-  }
+  // ssr: true,
+  // nitro: {
+  //   preset: 'node-server'
+  // }
 })
