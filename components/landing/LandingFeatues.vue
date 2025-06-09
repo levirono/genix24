@@ -1,7 +1,11 @@
 <template>
   <section class="mt-20">
     <UContainer>
-      <div v-for="(feature, index) in features" :key="index" class="flex flex-col md:flex-row items-center mb-16 glassmorphism p-8 rounded-lg" :class="{ 'md:flex-row-reverse': index % 2 !== 0 }">
+      <div v-for="(feature, index) in features" :key="index"
+        class="flex flex-col md:flex-row items-center mb-16 glassmorphism p-8 rounded-lg transition-all duration-700 opacity-0 translate-y-10"
+        :class="[{'md:flex-row-reverse': index % 2 !== 0}, isVisible[index] ? 'opacity-100 translate-y-0' : '']"
+        ref="elRefs[index]"
+      >
         <div class="md:w-1/2 md:pr-8 mb-8 md:mb-0" :class="{ 'md:pl-8': index % 2 !== 0 }">
           <h3 class="text-3xl font-bold mb-4 bg-clip-text text-transparent" :class="feature.gradientClass">{{ feature.title }}</h3>
           <p class="text-gray-600 dark:text-gray-400">
@@ -17,6 +21,9 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useScrollReveal } from '../useScrollReveal';
+
 const features = [
   {
     title: "Innovative Solutions",
@@ -37,4 +44,15 @@ const features = [
     gradientClass: "bg-gradient-to-r from-blue-500 to-emerald-500"
   }
 ];
+
+const elRefs = ref([]);
+const isVisible = ref([]);
+
+onMounted(() => {
+  features.forEach((_, i) => {
+    const { el, isVisible: vis } = useScrollReveal();
+    elRefs.value[i] = el;
+    isVisible.value[i] = vis;
+  });
+});
 </script>

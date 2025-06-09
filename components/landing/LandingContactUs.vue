@@ -1,46 +1,61 @@
 <template>
-    <section id="contact-us" class="mt-20">
-      <h2 class="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-        Contact Us
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div v-for="method in contactMethods" :key="method.title" class="text-center">
-          <div class="text-5xl mb-4" v-html="method.icon"></div>
-          <h3 class="text-2xl font-semibold mb-2">{{ method.title }}</h3>
-          <p class="text-gray-600 dark:text-gray-400">{{ method.description }}</p>
-        </div>
+  <section id="contact-us" class="mt-20">
+    <h2
+      class="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+      Contact Us
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div v-for="(method, i) in contactMethods" :key="method.title"
+        class="text-center opacity-0 translate-y-10 transition-all duration-700"
+        :class="isVisible[i] ? 'opacity-100 translate-y-0' : ''" ref="elRefs[i]">
+        <div class="text-5xl mb-4" v-html="method.icon"></div>
+        <h3 class="text-2xl font-semibold mb-2">{{ method.title }}</h3>
+        <p class="text-gray-600 dark:text-gray-400">{{ method.description }}</p>
       </div>
-      <!--    -->
-    </section>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  
-  const contactMethods = [
-    {
-      icon: "📞",
-      title: "Phone",
-      description: "Call us at +254 793858343"
-    },
-    {
-      icon: "✉️",
-      title: "Email",
-      description: "Send us an email at genixlsolutions@gmail.com"
-    },
-    {
-      icon: "🏢",
-      title: "Office",
-      description: "Visit us at Eldoret, Eldoret City"
-    }
-  ];
-  
-  const form = ref({
-    name: '',
-    email: '',
-    message: ''
+    </div>
+    <!--    -->
+  </section>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useScrollReveal } from '../useScrollReveal';
+
+const contactMethods = [
+  {
+    icon: "📞",
+    title: "Phone",
+    description: "Call us at +254 793858343"
+  },
+  {
+    icon: "✉️",
+    title: "Email",
+    description: "Send us an email at genixlsolutions@gmail.com"
+  },
+  {
+    icon: "🏢",
+    title: "Office",
+    description: "Visit us at Eldoret, Eldoret City"
+  }
+];
+
+const form = ref({
+  name: '',
+  email: '',
+  message: ''
+});
+
+const elRefs = ref([]);
+const isVisible = ref([]);
+
+onMounted(() => {
+  contactMethods.forEach((_, i) => {
+    const { el, isVisible: vis } = useScrollReveal();
+    elRefs.value[i] = el;
+    isVisible.value[i] = vis;
   });
-  
+});
+
 //   const submitForm = () => {
 //     // Here you would typically send the form data to your backend
 //     console.log('Form submitted:', form.value);
@@ -48,4 +63,4 @@
 //     form.value = { name: '', email: '', message: '' };
 //     // You might also want to show a success message to the user
 //   };
-  </script>
+</script>

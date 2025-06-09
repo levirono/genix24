@@ -4,7 +4,11 @@
       <h3 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500">OUR PRODUCTS</h3>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <UCard v-for="product in products" :key="product.title" class="glassmorphism hover:scale-105 transition-transform duration-300">
+      <UCard v-for="(product, i) in products" :key="product.title"
+        class="glassmorphism hover:scale-105 transition-transform duration-300 opacity-0 translate-y-10 transition-all duration-700"
+        :class="isVisible[i] ? 'opacity-100 translate-y-0' : ''"
+        ref="elRefs[i]"
+      >
         <template #header>
           <h3 class="text-2xl font-bold mb-2 text-blue-600 dark:text-blue-400">{{ product.title }}</h3>
         </template>
@@ -31,24 +35,38 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useScrollReveal } from '../useScrollReveal';
+
 const products = [
   {
     title: "FUELFINDER",
-    description: "Control your entire home with our intuitive smart home system.",
+    description: "Track the location of fuel stations and check on their status.",
     link: "/products/smart-home",
     image: "fuelfinder.jpg"
   },
   {
     title: "ONE the all in one platform",
-    description: "Harness the power of AI to gain invaluable insights from your data.",
+    description: "A seamless way to manage all your items in one gro.",
     link: "/products/ai-analytics",
     image: "one.png"
   },
   {
-    title: "great tech wizard",
-    description: "Stay connected and monitor your health with our cutting-edge wearables.",
-    link: "/products/wearables",
-    image: "/api/placeholder/400/300"
+    title: "Genixl Reviews",
+    description: "Get reviews of latest devices as soon as they are released",
+    link: "https://gr-genixls-projects.vercel.app/",
+    image: "GR.jpg"
   }
 ];
+
+const elRefs = ref([]);
+const isVisible = ref([]);
+
+onMounted(() => {
+  products.forEach((_, i) => {
+    const { el, isVisible: vis } = useScrollReveal();
+    elRefs.value[i] = el;
+    isVisible.value[i] = vis;
+  });
+});
 </script>

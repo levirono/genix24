@@ -6,7 +6,7 @@
             <h2 class="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500">Our Core Values</h2>
           </template>
           <ul class="space-y-6">
-            <li v-for="value in coreValues" :key="value.title" class="flex items-start">
+            <li v-for="(value, i) in coreValues" :key="value.title" class="flex items-start opacity-0 translate-y-10 transition-all duration-700" :class="isVisible[i] ? 'opacity-100 translate-y-0' : ''" ref="elRefs[i]">
               <div class="text-3xl mr-4" v-html="value.icon"></div>
               <div>
                 <h3 class="text-xl font-semibold mb-2">{{ value.title }}</h3>
@@ -27,6 +27,9 @@
   </template>
   
   <script setup>
+  import { ref, onMounted } from 'vue';
+  import { useScrollReveal } from '../useScrollReveal';
+  
   const coreValues = [
     {
       icon: "🌿",
@@ -46,4 +49,15 @@
   ];
   
   const mission = 'At Genixl, our mission is to harness the power of innovative technology to create a more sustainable future. We are committed to developing eco-friendly solutions that reduce environmental impact while enhancing efficiency and productivity for businesses and individuals alike.';
+  
+  const elRefs = ref([]);
+  const isVisible = ref([]);
+  
+  onMounted(() => {
+    coreValues.forEach((_, i) => {
+      const { el, isVisible: vis } = useScrollReveal();
+      elRefs.value[i] = el;
+      isVisible.value[i] = vis;
+    });
+  });
   </script>

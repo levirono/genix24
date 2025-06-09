@@ -3,7 +3,7 @@
     <nav class="flex justify-between items-center max-w-7xl mx-auto">
       <!-- Logo -->
       <NuxtLink to="/" class="flex items-center gap-2">
-        <img src="/images/genixl.jpg" alt="Genixl Logo" class="h-20 w-auto rounded shadow" />
+        <img src="/images/genixl2.png" alt="Genixl Logo" class="h-20 w-auto rounded shadow" />
         <span class="sr-only">Genixl Home</span>
       </NuxtLink>
       <!-- Desktop Navigation -->

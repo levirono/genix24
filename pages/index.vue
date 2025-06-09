@@ -12,6 +12,12 @@
   </template>
   
   <script setup>
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://genix24.vercel.app/' }
+  ]
+});
+
 // import { ref, watchEffect } from 'vue';
 
 // // Theme management
