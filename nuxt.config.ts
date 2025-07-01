@@ -19,7 +19,8 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Genixl',      meta: [
+      title: 'Genixl',
+      meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Genixl - Innovative solutions for your business. Discover our services, products, and core values.' },
@@ -43,4 +44,3 @@ export default defineNuxtConfig({
   //   preset: 'node-server'
   // }
 })
-  
