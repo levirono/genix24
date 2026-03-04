@@ -1,63 +1,59 @@
 <template>
-    <section id="about-us" class="mt-20">
-      <UContainer>
-        <UCard id="core-values" class="glassmorphism mb-8">
-          <template #header>
-            <h2 class="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500">Our Core Values</h2>
-          </template>
-          <ul class="space-y-6">
-            <li v-for="(value, i) in coreValues" :key="value.title" class="flex items-start opacity-0 translate-y-10 transition-all duration-700" :class="isVisible[i] ? 'opacity-100 translate-y-0' : ''" ref="elRefs[i]">
-              <div class="text-3xl mr-4" v-html="value.icon"></div>
-              <div>
-                <h3 class="text-xl font-semibold mb-2">{{ value.title }}</h3>
-                <p class="text-gray-600 dark:text-gray-400">{{ value.description }}</p>
-              </div>
+  <section id="about-us" class="section-shell mt-20 space-y-10">
+    <div class="grid gap-10 md:grid-cols-[ minmax(0,1.4fr)_minmax(0,1fr) ] md:items-start">
+      <article class="space-y-4">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
+          About Genixl
+        </p>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
+          A small team of engineers, designers, and product thinkers.
+        </h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300">
+          Genixl is a software company focused on building stable, scalable, and thoughtfully designed digital
+          products. We work with startups and established teams that need a trusted partner rather than a rotating
+          set of contractors.
+        </p>
+        <p class="text-sm text-slate-600 dark:text-slate-300">
+          Our work spans product discovery, UX and visual design, hands‑on engineering, and long‑term operations.
+          We favour calm, focused collaboration over noisy releases so your team stays confident about where the
+          product is going.
+        </p>
+      </article>
+
+      <aside class="space-y-4">
+        <div class="card-surface p-5">
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-50">
+            Core principles
+          </h3>
+          <ul class="mt-3 space-y-2 text-xs text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="pill-bullet pill-bullet--green"></span>
+              <span>Design software around people and real workflows, not just features.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="pill-bullet pill-bullet--orange"></span>
+              <span>Ship in small, observable increments backed by tests and monitoring.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="pill-bullet pill-bullet--blue"></span>
+              <span>Leave every codebase healthier than we found it with better structure and documentation.</span>
             </li>
           </ul>
-        </UCard>
-  
-        <UCard id="our-mission" class="glassmorphism">
-          <template #header>
-            <h2 class="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-red-500">Our Mission</h2>
-          </template>
-          <p class="text-gray-600 dark:text-gray-400">{{ mission }}</p>
-        </UCard>
-      </UContainer>
-    </section>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import { useScrollReveal } from '../useScrollReveal';
-  
-  const coreValues = [
-    {
-      icon: "🌿",
-      title: 'Sustainability',
-      description: 'We prioritize environmental responsibility in all our innovations and operations.'
-    },
-    {
-      icon: "💡",
-      title: 'Innovation',
-      description: 'We constantly push the boundaries of technology to create eco-friendly solutions.'
-    },
-    {
-      icon: "🤝",
-      title: 'Collaboration',
-      description: 'We believe in the power of teamwork and partnerships to drive positive change.'
-    }
-  ];
-  
-  const mission = 'At Genixl, our mission is to harness the power of innovative technology to create a more sustainable future. We are committed to developing eco-friendly solutions that reduce environmental impact while enhancing efficiency and productivity for businesses and individuals alike.';
-  
-  const elRefs = ref([]);
-  const isVisible = ref([]);
-  
-  onMounted(() => {
-    coreValues.forEach((_, i) => {
-      const { el, isVisible: vis } = useScrollReveal();
-      elRefs.value[i] = el;
-      isVisible.value[i] = vis;
-    });
-  });
-  </script>
+        </div>
+
+        <div class="card-surface p-5">
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-50">
+            How we work
+          </h3>
+          <p class="mt-2 text-xs text-slate-600 dark:text-slate-300">
+            We typically embed with your team for several months, then either continue as a product partner or help
+            you stand up your own internal engineering organisation.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</template>
+
+<script setup>
+</script>

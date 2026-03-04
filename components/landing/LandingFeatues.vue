@@ -1,58 +1,113 @@
 <template>
-  <section class="mt-20">
-    <UContainer>
-      <div v-for="(feature, index) in features" :key="index"
-        class="flex flex-col md:flex-row items-center mb-16 glassmorphism p-8 rounded-lg transition-all duration-700 opacity-0 translate-y-10"
-        :class="[{'md:flex-row-reverse': index % 2 !== 0}, isVisible[index] ? 'opacity-100 translate-y-0' : '']"
-        ref="elRefs[index]"
-      >
-        <div class="md:w-1/2 md:pr-8 mb-8 md:mb-0" :class="{ 'md:pl-8': index % 2 !== 0 }">
-          <h3 class="text-3xl font-bold mb-4 bg-clip-text text-transparent" :class="feature.gradientClass">{{ feature.title }}</h3>
-          <p class="text-gray-600 dark:text-gray-400">
-            {{ feature.description }}
-          </p>
+  <section id="services" class="section-shell mt-20 space-y-8">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
+          Services
+        </p>
+        <h2 class="mt-2 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
+          Cross‑functional teams for modern software delivery.
+        </h2>
+        <p class="mt-3 max-w-2xl text-sm text-slate-600 dark:text-slate-300">
+          A concise view of how we structure delivery across web, mobile, and cloud. Explore the full breakdown on
+          the services page.
+        </p>
+      </div>
+      <div class="grid grid-cols-3 gap-2 text-xs text-slate-600 dark:text-slate-300 md:text-[0.7rem]">
+        <div class="inline-flex items-center rounded-full bg-brand-green/8 px-3 py-1">
+          <span class="pill-bullet pill-bullet--green"></span>
+          Product discovery
         </div>
-        <div class="md:w-1/2">
-          <img :src="feature.image" :alt="feature.title" class="w-50 h-50 object-cover rounded-lg shadow-lg" />
+        <div class="inline-flex items-center rounded-full bg-brand-orange/8 px-3 py-1">
+          <span class="pill-bullet pill-bullet--orange"></span>
+          Delivery squads
+        </div>
+        <div class="inline-flex items-center rounded-full bg-brand-blue/8 px-3 py-1">
+          <span class="pill-bullet pill-bullet--blue"></span>
+          Long‑term support
         </div>
       </div>
-    </UContainer>
+      <NuxtLink
+        to="/our-services"
+        class="inline-flex items-center justify-center rounded-full border border-brand-green/40 bg-brand-green/5 px-4 py-2 text-xs font-semibold text-brand-green shadow-sm transition hover:border-brand-green hover:bg-brand-green/10"
+      >
+        View all services
+      </NuxtLink>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-3">
+      <article
+        v-for="(service, index) in services"
+        :key="service.title"
+        ref="elRefs[index]"
+        class="card-surface card-hover relative overflow-hidden opacity-0 translate-y-6 transition-all duration-700"
+        :class="isVisible[index] ? 'opacity-100 translate-y-0' : ''"
+      >
+        <div
+          class="pointer-events-none absolute inset-x-6 top-0 h-24 rounded-b-full bg-gradient-to-b opacity-40"
+          :class="service.tint"
+        ></div>
+        <div class="relative p-5 space-y-4">
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-50">
+            {{ service.title }}
+          </h3>
+          <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+            {{ service.description }}
+          </p>
+          <ul class="mt-3 space-y-1.5 text-xs text-slate-500 dark:text-slate-300">
+            <li v-for="detail in service.details" :key="detail" class="flex items-start gap-2">
+              <span class="pill-bullet pill-bullet--green" v-if="service.accent === 'green'"></span>
+              <span class="pill-bullet pill-bullet--orange" v-else-if="service.accent === 'orange'"></span>
+              <span class="pill-bullet pill-bullet--blue" v-else></span>
+              <span>{{ detail }}</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useScrollReveal } from '../useScrollReveal';
+import { ref, onMounted } from 'vue'
+import { useScrollReveal } from '../useScrollReveal'
 
-const features = [
+const services = [
   {
-    title: "Innovative Solutions",
-    description: "At Genixl, we're dedicated to pushing the boundaries of technology. Our team of experts works tirelessly to create solutions that transform industries and improve lives.",
-    image: "innovation.jpeg",
-    gradientClass: "bg-gradient-to-r from-blue-500 to-emerald-500"
+    title: 'Web product engineering',
+    description:
+      'Design and build marketing sites, dashboards, internal tools, and SaaS platforms that stay fast as they grow.',
+    details: ['Design systems and UX flows', 'Component‑based frontends (Nuxt, React)', 'API integration and testing'],
+    tint: 'from-brand-green/20 via-brand-green/5 to-transparent',
+    accent: 'green',
   },
   {
-    title: "Customer-Centric Approach",
-    description: "We believe in putting our customers first. Our products and services are designed with your needs in mind, ensuring that we deliver value and exceed expectations at every turn.",
-    image: "centric.jpeg",
-    gradientClass: "bg-gradient-to-r from-amber-500 to-red-500"
+    title: 'Mobile & cross‑platform apps',
+    description:
+      'From MVPs to production apps running in the store, we deliver smooth, reliable mobile experiences.',
+    details: ['iOS and Android from one codebase', 'Offline‑first and real‑time features', 'Analytics and experimentation'],
+    tint: 'from-brand-orange/20 via-brand-orange/5 to-transparent',
+    accent: 'orange',
   },
   {
-    title: "Sustainable Future",
-    description: "At Genixl, we're committed to creating a sustainable future. Our eco-friendly practices and innovative green technologies are designed to minimize our environmental impact while maximizing efficiency.",
-    image: "sustain.jpeg",
-    gradientClass: "bg-gradient-to-r from-blue-500 to-emerald-500"
-  }
-];
+    title: 'Cloud, integrations & DevOps',
+    description:
+      'Modern infrastructure to keep your product observable, secure, and easy to ship to.',
+    details: ['Cloud architecture and CI/CD pipelines', 'APIs, auth, and third‑party integrations', 'Monitoring, logging, and alerting'],
+    tint: 'from-brand-blue/25 via-brand-blue/5 to-transparent',
+    accent: 'blue',
+  },
+]
 
-const elRefs = ref([]);
-const isVisible = ref([]);
+const elRefs = ref([])
+const isVisible = ref([])
 
 onMounted(() => {
-  features.forEach((_, i) => {
-    const { el, isVisible: vis } = useScrollReveal();
-    elRefs.value[i] = el;
-    isVisible.value[i] = vis;
-  });
-});
+  services.forEach((_, i) => {
+    const { el, isVisible: vis } = useScrollReveal()
+    elRefs.value[i] = el
+    isVisible.value[i] = vis
+  })
+})
 </script>
+

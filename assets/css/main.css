@@ -2,15 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    transition: background-color 0.3s, color 0.3s;
-  }
+  @apply font-sans bg-brand-surfaceLight text-gray-900 dark:bg-brand-surfaceDark dark:text-gray-100;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+.pill-bullet {
+  @apply inline-flex h-3 w-3 rounded-full mr-3;
+}
+
+.pill-bullet--green {
+  @apply bg-gradient-to-br from-brand-green to-brand-greenSoft;
+}
+
+.pill-bullet--orange {
+  @apply bg-gradient-to-br from-brand-orange to-brand-orangeSoft;
+}
+
+.pill-bullet--blue {
+  @apply bg-gradient-to-br from-brand-blue to-brand-blueSoft;
+}
+
+.section-shell {
+  @apply max-w-6xl mx-auto px-4 md:px-8;
+}
+
+.card-surface {
+  @apply rounded-2xl border border-white/30 bg-white/80 shadow-sm backdrop-blur-sm
+    dark:border-white/5 dark:bg-slate-900/70;
+}
+
+.card-hover {
+  @apply transition-transform transition-shadow duration-500 ease-out hover:-translate-y-1 hover:shadow-xl;
+}
 
 @media (max-width: 640px) {
   html {
-    font-size: 8px; /* Reduce base font size for small screens */
+    font-size: 8px;
   }
+
   body {
-    font-size: 1rem; /* Ensure body text is also smaller */
+    font-size: 1rem;
   }
 }
