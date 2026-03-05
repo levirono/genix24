@@ -2,10 +2,11 @@
   <header class="sticky top-0 z-40 border-b border-white/10 bg-white/80 backdrop-blur-md dark:bg-slate-900/80">
     <nav class="section-shell flex items-center justify-between py-3">
       <NuxtLink to="/" class="flex items-center gap-3">
-        <div
-          class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-green to-brand-orange text-xs font-semibold text-white shadow-md">
-          Gx
-        </div>
+        <img
+          src="/images/genixl2.png"
+          alt="Genixl Logo"
+          class="h-10 w-10 rounded-xl object-contain flex-shrink-0"
+        />
         <div class="flex flex-col leading-tight">
           <span class="text-sm font-semibold tracking-wide text-gray-900 dark:text-gray-50">
             Genixl
