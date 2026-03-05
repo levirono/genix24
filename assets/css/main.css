@@ -40,13 +40,3 @@ body {
 .card-hover {
   @apply transition-transform transition-shadow duration-500 ease-out hover:-translate-y-1 hover:shadow-xl;
 }
-
-@media (max-width: 640px) {
-  html {
-    font-size: 8px;
-  }
-
-  body {
-    font-size: 1rem;
-  }
-}
