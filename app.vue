@@ -7,5 +7,12 @@
 </template>
 
 <script setup>
-// App level setup
+import { onMounted } from 'vue'
+
+// Initialize auth on app load
+const { initUser } = useAuth()
+
+onMounted(() => {
+  initUser()
+})
 </script>

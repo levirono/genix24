@@ -1,4 +1,4 @@
-import { supabase, handleDatabaseError } from '../utils/supabase';
+import { getSupabase, handleDatabaseError } from '../utils/supabase';
 
 export default defineEventHandler(async (event) => {
   if (event.req.method !== 'POST') {
@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { name, email, message } = body;
   try {
+    const supabase = getSupabase();
     const { error } = await supabase.from('contact_messages').insert([{ name, email, message }]);
     if (error) return { error: error.message };
     return { success: true };

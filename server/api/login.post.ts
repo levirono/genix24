@@ -1,17 +1,24 @@
-import { supabase, handleDatabaseError } from '../utils/supabase';
+import { getSupabaseAuth, handleDatabaseError } from '../utils/supabase';
 
 export default defineEventHandler(async (event) => {
   if (event.req.method !== 'POST') {
     return { error: 'Method not allowed' };
   }
   const body = await readBody(event);
-  const { email, password, username } = body;
+  const { email, password } = body;
+  
+  if (!email || !password) {
+    return { error: 'Email and password are required' };
+  }
+  
   try {
-    // Sign in with email and password
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) return { error: error.message };
+    const supabaseAuth = getSupabaseAuth();
+    const { data, error } = await supabaseAuth.auth.signInWithPassword({ email, password });
+    if (error) {
+      return { error: error.message };
+    }
     return { user: data.user, session: data.session };
   } catch (error) {
-    handleDatabaseError(error);
+    return handleDatabaseError(error);
   }
 });

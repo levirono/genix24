@@ -62,6 +62,13 @@
 
         <div class="hidden items-center gap-2 md:flex">
           <template v-if="user && user.username">
+            <NuxtLink
+              v-if="user.role === 'admin'"
+              to="/admin"
+              class="rounded-full border border-emerald-300/50 bg-emerald-100/50 px-3 py-1 text-xs font-semibold text-emerald-700 dark:border-emerald-500/50 dark:bg-emerald-900/30 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
+            >
+              Admin
+            </NuxtLink>
             <div class="relative">
               <button
                 type="button"
@@ -77,7 +84,7 @@
                 >
                   <button
                     type="button"
-                    @click="logout"
+                    @click="handleLogout"
                     class="w-full rounded-lg px-3 py-2 text-left text-red-500 hover:bg-red-50 dark:hover:bg-red-900/40"
                   >
                     Sign out
@@ -170,23 +177,33 @@
           </li>
         </ul>
 
-        <div class="flex items-center justify-between pt-2">
+        <div class="flex items-center justify-between pt-2 flex-col gap-2 w-full">
           <template v-if="user && user.username">
-            <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-semibold text-brand-green">
-              {{ user.username }}
-            </span>
-            <button
-              type="button"
-              @click="logout"
-              class="text-xs font-medium text-red-500 hover:text-red-600"
+            <div class="flex items-center gap-2 w-full justify-between">
+              <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-semibold text-brand-green">
+                {{ user.username }}
+              </span>
+              <button
+                type="button"
+                @click="handleLogout"
+                class="text-xs font-medium text-red-500 hover:text-red-600"
+              >
+                Sign out
+              </button>
+            </div>
+            <NuxtLink
+              v-if="user.role === 'admin'"
+              to="/admin"
+              class="w-full text-center rounded-lg bg-emerald-100/50 dark:bg-emerald-900/30 px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
+              @click="showMobileMenu = false"
             >
-              Sign out
-            </button>
+              Admin Dashboard
+            </NuxtLink>
           </template>
           <template v-else>
             <NuxtLink
               to="/login"
-              class="rounded-full bg-gradient-to-r from-brand-green to-brand-orange px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:shadow-md"
+              class="w-full text-center rounded-full bg-gradient-to-r from-brand-green to-brand-orange px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:shadow-md"
               @click="showMobileMenu = false"
             >
               Client portal
@@ -203,22 +220,16 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTheme } from '~/composables/useTheme'
 
-const user = ref(null)
 const showMobileMenu = ref(false)
 const showLogoutMenu = ref(false)
 const route = useRoute()
 const router = useRouter()
 
 const { isDark, toggleTheme } = useTheme()
+const { user, initUser, logout } = useAuth()
 
 onMounted(() => {
-  try {
-    const userData = localStorage.getItem('user')
-    if (userData) {
-      user.value = JSON.parse(userData)
-    }
-  } catch (error) {
-  }
+  initUser()
 })
 
 const navigationLinks = [
@@ -255,10 +266,10 @@ function toggleLogoutMenu() {
   showLogoutMenu.value = !showLogoutMenu.value
 }
 
-function logout() {
-  localStorage.removeItem('user')
-  user.value = null
+function handleLogout() {
+  logout()
   showLogoutMenu.value = false
+  showMobileMenu.value = false
   router.push('/login')
 }
 </script>

@@ -1,7 +1,18 @@
 <template>
     <div class="min-h-screen flex flex-col items-center justify-center dark:bg-gray-900 bg-gray-50 py-16 px-4">
         <h1 class="text-4xl font-bold mb-4 dark:text-white text-gray-900">Login</h1>
+        
         <form class="w-full max-w-sm bg-white dark:bg-gray-800 p-8 rounded shadow" @submit.prevent="onLogin">
+            <!-- Success Message -->
+            <div v-if="successMessage" class="mb-4 p-3 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 rounded">
+                {{ successMessage }}
+            </div>
+            
+            <!-- Error Message -->
+            <div v-if="authError" class="mb-4 p-3 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">
+                {{ authError }}
+            </div>
+            
             <div class="mb-4">
                 <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">Email</label>
                 <input v-model="email"
@@ -28,9 +39,10 @@
             </div>
             <div class="flex items-center justify-between">
                 <button
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit">
-                    Login
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-blue-300 disabled:cursor-not-allowed"
+                    type="submit"
+                    :disabled="loading">
+                    {{ loading ? 'Logging in...' : 'Login' }}
                 </button>
                 <NuxtLink to="/signup" class="text-blue-500 hover:underline ml-4">Sign Up</NuxtLink>
             </div>
@@ -39,35 +51,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-const email = ref('');
-const password = ref('');
-const username = ref('');
-const showPassword = ref(false);
-const router = useRouter();
+import { ref } from 'vue'
+
+const email = ref('')
+const password = ref('')
+const username = ref('')
+const showPassword = ref(false)
+
+const { login, loading, error: authError } = useAuth()
+const router = useRouter()
+const successMessage = ref('')
 
 const onLogin = async () => {
-    try {
-        const response = await $fetch('/api/login', {
-            method: 'POST',
-            body: { email: email.value, password: password.value, username: username.value }
-        });
-        if (response && response.error) {
-            alert(response.error);
-        } else {
-            // Save user info to localStorage for header display
-            if (response && response.user) {
-                localStorage.setItem('user', JSON.stringify({
-                    email: response.user.email,
-                    username: response.user.user_metadata?.username || response.user.email
-                }));
-            }
-            alert('Login successful!');
-            await router.push('/');
-        }
-    } catch (err) {
-        alert('Login failed.');
-    }
-};
+  successMessage.value = ''
+  const success = await login(email.value, password.value, username.value)
+  
+  if (success) {
+    successMessage.value = 'Login successful! Redirecting...'
+    setTimeout(() => {
+      router.push('/')
+    }, 1000)
+  }
+}
 </script>

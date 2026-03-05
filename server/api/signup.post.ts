@@ -1,4 +1,4 @@
-import { supabase, handleDatabaseError } from '../utils/supabase';
+import { getSupabaseAuth, getSupabase, handleDatabaseError } from '../utils/supabase';
 
 export default defineEventHandler(async (event) => {
   if (event.req.method !== 'POST') {
@@ -6,19 +6,43 @@ export default defineEventHandler(async (event) => {
   }
   const body = await readBody(event);
   const { email, password, username } = body;
+  
+  if (!email || !password || !username) {
+    return { error: 'Email, password, and username are required' };
+  }
+  
   try {
-    // Create user in Supabase Auth
-    const { data, error } = await supabase.auth.signUp({
+    const supabaseAuth = getSupabaseAuth();
+    const supabase = getSupabase();
+    
+    const { data, error } = await supabaseAuth.auth.signUp({
       email,
       password,
       options: {
         data: { username }
       }
     });
-    if (error) return { error: error.message };
-    // Optionally, insert into a custom users table here
+    if (error) {
+      return { error: error.message };
+    }
+    
+    if (data.user) {
+      const { error: dbError } = await supabase
+        .from('users')
+        .insert({
+          id: data.user.id,
+          username: username,
+          email: email,
+          role: 'user'
+        });
+      
+      if (dbError) {
+        console.error('Error creating user record:', dbError);
+      }
+    }
+    
     return { user: data.user };
   } catch (error) {
-    handleDatabaseError(error);
+    return handleDatabaseError(error);
   }
 });

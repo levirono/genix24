@@ -25,7 +25,7 @@ we need apage tha<template>
                         <td class="px-4 py-2">{{ msg.message }}</td>
                         <td class="px-4 py-2">{{ formatDate(msg.created_at) }}</td>
                         <td class="px-4 py-2">
-                            <a :href="`mailto:${msg.email}`"
+                            <a :href="`mailto:${msg.email}?subject=Re: Your message to Genix24&body=Dear ${msg.name},%0A%0AThank you for reaching out to us. We have received your message:%0A%0A${msg.message}%0A%0ABest regards,%0AGenix24 Team`"
                                 class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded transition-colors duration-200">Reply</a>
                         </td>
                     </tr>

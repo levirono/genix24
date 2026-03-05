@@ -70,46 +70,7 @@
 </template>
 
 <script setup lang="ts">
-const products = [
-  {
-    title: 'FuelFinder',
-    category: 'Mobility',
-    description:
-      'Helps drivers and fleet operators discover nearby fuel stations, availability, and pricing in real time.',
-    highlights: [
-      'Location‑aware station search with filters',
-      'Availability and pricing signals sourced from the network',
-      'Integration points for fleet dashboards or consumer apps',
-    ],
-    link: '/products/fuelfinder',
-    tint: 'from-brand-orange/25 via-brand-orange/5 to-transparent',
-  },
-  {
-    title: 'One Workspace',
-    category: 'Operations',
-    description:
-      'A unified workspace for tracking inventory, approvals, and processes without spreadsheet sprawl.',
-    highlights: [
-      'Configurable data models and views tailored to teams',
-      'Role‑based access, audit trails, and activity feeds',
-      'Responsive experience across web and mobile devices',
-    ],
-    link: '/products/one-workspace',
-    tint: 'from-brand-green/25 via-brand-green/5 to-transparent',
-  },
-  {
-    title: 'Genixl Labs',
-    category: 'Experimentation',
-    description:
-      'Our internal lab for testing new UI patterns, frameworks, and automation before bringing them into client work.',
-    highlights: [
-      'Performance benchmarking sandboxes and testbeds',
-      'Starter kits and templates for common product types',
-      'Continuously updated best‑practice stacks for web, mobile, and cloud',
-    ],
-    link: 'https://gr-genixls-projects.vercel.app/',
-    tint: 'from-brand-blue/25 via-brand-blue/5 to-transparent',
-  },
-]
+const productsData = await $fetch('/api/products');
+const products = productsData?.products || [];
 </script>
 

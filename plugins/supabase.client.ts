@@ -3,7 +3,11 @@ import { createClient } from '@supabase/supabase-js';
 export default defineNuxtPlugin(nuxtApp => {
   const config = useRuntimeConfig();
   const supabaseUrl = config.public.supabaseUrl;
-  const supabaseKey = config.public.supabaseKey; // matches nuxt.config key name
+  const supabaseKey = config.public.supabaseKey;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase URL or key is missing. Check your .env file.');
+  }
   
   const supabase = createClient(supabaseUrl, supabaseKey);
   nuxtApp.provide('supabase', supabase);
