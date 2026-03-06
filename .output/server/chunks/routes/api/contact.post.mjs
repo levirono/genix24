@@ -1,11 +1,13 @@
 import { d as defineEventHandler, r as readBody } from '../../runtime.mjs';
-import { s as supabase, h as handleDatabaseError } from '../../_/supabase.mjs';
+import { g as getSupabase, h as handleDatabaseError } from '../../_/supabase.mjs';
 import 'node:http';
 import 'node:https';
 import 'fs';
 import 'path';
+import 'vue';
 import 'node:fs';
 import 'node:url';
+import 'consola/core';
 import '@supabase/supabase-js';
 
 const contact_post = defineEventHandler(async (event) => {
@@ -15,6 +17,7 @@ const contact_post = defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { name, email, message } = body;
   try {
+    const supabase = getSupabase();
     const { error } = await supabase.from("contact_messages").insert([{ name, email, message }]);
     if (error)
       return { error: error.message };

@@ -1,11 +1,13 @@
 import { d as defineEventHandler, r as readBody } from '../../runtime.mjs';
-import { s as supabase, h as handleDatabaseError } from '../../_/supabase.mjs';
+import { a as getSupabaseAuth, h as handleDatabaseError } from '../../_/supabase.mjs';
 import 'node:http';
 import 'node:https';
 import 'fs';
 import 'path';
+import 'vue';
 import 'node:fs';
 import 'node:url';
+import 'consola/core';
 import '@supabase/supabase-js';
 
 const login_post = defineEventHandler(async (event) => {
@@ -13,14 +15,19 @@ const login_post = defineEventHandler(async (event) => {
     return { error: "Method not allowed" };
   }
   const body = await readBody(event);
-  const { email, password, username } = body;
+  const { email, password } = body;
+  if (!email || !password) {
+    return { error: "Email and password are required" };
+  }
   try {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error)
+    const supabaseAuth = getSupabaseAuth();
+    const { data, error } = await supabaseAuth.auth.signInWithPassword({ email, password });
+    if (error) {
       return { error: error.message };
+    }
     return { user: data.user, session: data.session };
   } catch (error) {
-    handleDatabaseError(error);
+    return handleDatabaseError(error);
   }
 });
 

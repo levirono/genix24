@@ -1,18 +1,19 @@
-import { version, ref, watchEffect, watch, getCurrentInstance, defineAsyncComponent, toRef, isRef, defineComponent, provide, shallowReactive, h, inject, Suspense, nextTick, Fragment, Transition, hasInjectionContext, unref, resolveComponent, useSSRContext, createApp, effectScope, reactive, getCurrentScope, computed, mergeProps, withCtx, createVNode, openBlock, createBlock, toDisplayString, createCommentVNode, createTextVNode, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, shallowRef, isReadonly, isShallow, isReactive, toRaw } from 'vue';
-import { $ as $fetch, c as createError$1, m as defuFn, n as klona, o as defu, p as createDefu, q as parseQuery, t as createHooks, v as hasProtocol, w as joinURL, x as isScriptProtocol, y as withQuery, z as sanitizeStatusCode, A as withTrailingSlash, B as withoutTrailingSlash, C as toRouteMatcher, D as createRouter$1 } from '../runtime.mjs';
-import { b as baseURL, p as publicAssetsURL } from '../routes/renderer.mjs';
-import { CapoPlugin, getActiveHead } from 'unhead';
+import { defineComponent, ref, h, resolveComponent, readonly, inject, watch, Suspense, nextTick, Fragment, Transition, toRef, isRef, computed, provide, shallowReactive, hasInjectionContext, getCurrentInstance, watchEffect, unref, version, createElementBlock, defineAsyncComponent, createApp, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, reactive, effectScope, shallowRef, isReadonly, isReactive, toRaw, isShallow, mergeProps, getCurrentScope, withCtx, toDisplayString, createTextVNode, useSSRContext } from 'vue';
+import { p as parseQuery, i as createError$1, m as klona, n as defuFn, o as hasProtocol, q as isScriptProtocol, t as joinURL, v as defu, w as withQuery, x as sanitizeStatusCode, y as withTrailingSlash, z as withoutTrailingSlash, $ as $fetch$1, A as createHooks, B as toRouteMatcher, C as createRouter$1 } from '../runtime.mjs';
+import { b as baseURL } from '../routes/renderer.mjs';
+import { getActiveHead, CapoPlugin } from 'unhead';
 import { defineHeadPlugin, composableNames } from '@unhead/shared';
-import { RouterView, useRoute as useRoute$1, useRouter as useRouter$1, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
+import { RouterView, createMemoryHistory, createRouter, START_LOCATION, useRoute as useRoute$1, useRouter as useRouter$1 } from 'vue-router';
 import { createSharedComposable } from '@vueuse/core';
 import { extendTailwindMerge } from 'tailwind-merge';
-import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderSuspense, ssrRenderVNode } from 'vue/server-renderer';
+import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode, ssrRenderAttrs, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate } from 'vue/server-renderer';
 import 'node:http';
 import 'node:https';
 import 'fs';
 import 'path';
 import 'node:fs';
 import 'node:url';
+import 'consola/core';
 import 'vue-bundle-renderer/runtime';
 import 'devalue';
 import '@unhead/ssr';
@@ -35,7 +36,7 @@ function createContext$1(opts = {}) {
     }
   }
   const _getCurrentInstance = () => {
-    if (als && currentInstance === void 0) {
+    if (als) {
       const instance = als.getStore();
       if (instance !== void 0) {
         return instance;
@@ -102,7 +103,6 @@ function createNamespace$1(defaultOpts = {}) {
       if (!contexts[key]) {
         contexts[key] = createContext$1({ ...defaultOpts, ...opts });
       }
-      contexts[key];
       return contexts[key];
     }
   };
@@ -115,7 +115,7 @@ const asyncHandlersKey$1 = "__unctx_async_handlers__";
 const asyncHandlers$1 = _globalThis$1[asyncHandlersKey$1] || (_globalThis$1[asyncHandlersKey$1] = /* @__PURE__ */ new Set());
 
 if (!globalThis.$fetch) {
-  globalThis.$fetch = $fetch.create({
+  globalThis.$fetch = $fetch$1.create({
     baseURL: baseURL()
   });
 }
@@ -506,8 +506,6 @@ function injectHead() {
     return _global[globalKey$1]();
   }
   const head = inject(headSymbol);
-  if (!head && "production" !== "production")
-    console.warn("Unhead is missing Vue context, falling back to shared context. This may have unexpected results.");
   return head || getActiveHead();
 }
 function useHead(input, options = {}) {
@@ -568,7 +566,7 @@ function createContext(opts = {}) {
     }
   }
   const _getCurrentInstance = () => {
-    if (als && currentInstance === void 0) {
+    if (als) {
       const instance = als.getStore();
       if (instance !== void 0) {
         return instance;
@@ -635,7 +633,6 @@ function createNamespace(defaultOpts = {}) {
       if (!contexts[key]) {
         contexts[key] = createContext({ ...defaultOpts, ...opts });
       }
-      contexts[key];
       return contexts[key];
     }
   };
@@ -695,51 +692,70 @@ async function getRouteRules(url) {
     return defu({}, ..._routeRulesMatcher.matchAll(url).reverse());
   }
 }
+const __nuxt_page_meta = {
+  middleware: "auth"
+};
 const _routes = [
   {
     name: "about",
     path: "/about",
-    component: () => import('./about-IlKScOkt.mjs').then((m) => m.default || m)
+    component: () => import('./about-BJRkIeek.mjs').then((m) => m.default || m)
   },
   {
     name: "admin-contacts",
     path: "/admin/contacts",
-    component: () => import('./contacts-hq3uy361.mjs').then((m) => m.default || m)
+    component: () => import('./contacts-CSgiwEW9.mjs').then((m) => m.default || m)
   },
   {
     name: "admin",
     path: "/admin",
-    component: () => import('./index-7Aiutp5j.mjs').then((m) => m.default || m)
+    meta: __nuxt_page_meta || {},
+    component: () => import('./index-CnQWMpMi.mjs').then((m) => m.default || m)
+  },
+  {
+    name: "admin-products",
+    path: "/admin/products",
+    component: () => import('./products-CNHTb6Yu.mjs').then((m) => m.default || m)
   },
   {
     name: "admin-users",
     path: "/admin/users",
-    component: () => import('./users-B-bDaWox.mjs').then((m) => m.default || m)
+    component: () => import('./users-OQ56OGLU.mjs').then((m) => m.default || m)
   },
   {
     name: "contact-us",
     path: "/contact-us",
-    component: () => import('./contact-us-DQZg0i4p.mjs').then((m) => m.default || m)
+    component: () => import('./contact-us-CQDq9mhw.mjs').then((m) => m.default || m)
   },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-_YcYRMnh.mjs').then((m) => m.default || m)
+    component: () => import('./index-CHNicTUr.mjs').then((m) => m.default || m)
+  },
+  {
+    name: "industries",
+    path: "/industries",
+    component: () => import('./industries-CRHS-fAn.mjs').then((m) => m.default || m)
   },
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-DazlB_GY.mjs').then((m) => m.default || m)
+    component: () => import('./login-D8owkeUO.mjs').then((m) => m.default || m)
   },
   {
     name: "our-services",
     path: "/our-services",
-    component: () => import('./our-services-Wg_eUZ63.mjs').then((m) => m.default || m)
+    component: () => import('./our-services-BRekXlm0.mjs').then((m) => m.default || m)
+  },
+  {
+    name: "products",
+    path: "/products",
+    component: () => import('./products-VQqhAbaj.mjs').then((m) => m.default || m)
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-pYg0laSM.mjs').then((m) => m.default || m)
+    component: () => import('./signup-DxMg3-31.mjs').then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {
@@ -849,7 +865,9 @@ const globalMiddleware = [
   validate,
   manifest_45route_45rule
 ];
-const namedMiddleware = {};
+const namedMiddleware = {
+  auth: () => import('./auth-BIu2XJtQ.mjs')
+};
 const plugin = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
   enforce: "pre",
@@ -1034,288 +1052,6 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     return { provide: { router } };
   }
 });
-function definePayloadReducer(name, reduce) {
-  {
-    useNuxtApp().ssrContext._payloadReducers[name] = reduce;
-  }
-}
-const reducers = {
-  NuxtError: (data) => isNuxtError(data) && data.toJSON(),
-  EmptyShallowRef: (data) => isRef(data) && isShallow(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_"),
-  EmptyRef: (data) => isRef(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_"),
-  ShallowRef: (data) => isRef(data) && isShallow(data) && data.value,
-  ShallowReactive: (data) => isReactive(data) && isShallow(data) && toRaw(data),
-  Ref: (data) => isRef(data) && data.value,
-  Reactive: (data) => isReactive(data) && toRaw(data)
-};
-const revive_payload_server_eJ33V7gbc6 = /* @__PURE__ */ defineNuxtPlugin({
-  name: "nuxt:revive-payload:server",
-  setup() {
-    for (const reducer in reducers) {
-      definePayloadReducer(reducer, reducers[reducer]);
-    }
-  }
-});
-const LazyIcon = defineAsyncComponent(() => import('./Icon-CQ_UJq0E.mjs').then((r) => r["default"] || r.default || r));
-const LazyIconCSS = defineAsyncComponent(() => import('./IconCSS-B8Peju0r.mjs').then((r) => r["default"] || r.default || r));
-const lazyGlobalComponents = [
-  ["Icon", LazyIcon],
-  ["IconCSS", LazyIconCSS]
-];
-const components_plugin_KR1HBZs4kY = /* @__PURE__ */ defineNuxtPlugin({
-  name: "nuxt:global-components",
-  setup(nuxtApp) {
-    for (const [name, component] of lazyGlobalComponents) {
-      nuxtApp.vueApp.component(name, component);
-      nuxtApp.vueApp.component("Lazy" + name, component);
-    }
-  }
-});
-const slidOverInjectionKey = Symbol("nuxt-ui.slideover");
-function _useSlideover() {
-  const slideoverState = inject(slidOverInjectionKey);
-  const isOpen = ref(false);
-  function open(component, props) {
-    if (!slideoverState) {
-      throw new Error("useSlideover() is called without provider");
-    }
-    slideoverState.value = {
-      component,
-      props: props ?? {}
-    };
-    isOpen.value = true;
-  }
-  async function close() {
-    if (!slideoverState)
-      return;
-    isOpen.value = false;
-  }
-  function reset() {
-    slideoverState.value = {
-      component: "div",
-      props: {}
-    };
-  }
-  function patch(props) {
-    if (!slideoverState)
-      return;
-    slideoverState.value = {
-      ...slideoverState.value,
-      props: {
-        ...slideoverState.value.props,
-        ...props
-      }
-    };
-  }
-  return {
-    open,
-    close,
-    reset,
-    patch,
-    isOpen
-  };
-}
-createSharedComposable(_useSlideover);
-const slideovers_LDumGYo2KH = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
-  const slideoverState = shallowRef({
-    component: "div",
-    props: {}
-  });
-  nuxtApp.vueApp.provide(slidOverInjectionKey, slideoverState);
-});
-const modalInjectionKey = Symbol("nuxt-ui.modal");
-function _useModal() {
-  const modalState = inject(modalInjectionKey);
-  const isOpen = ref(false);
-  function open(component, props) {
-    if (!modalState) {
-      throw new Error("useModal() is called without provider");
-    }
-    modalState.value = {
-      component,
-      props: props ?? {}
-    };
-    isOpen.value = true;
-  }
-  async function close() {
-    if (!modalState)
-      return;
-    isOpen.value = false;
-  }
-  function reset() {
-    modalState.value = {
-      component: "div",
-      props: {}
-    };
-  }
-  function patch(props) {
-    if (!modalState)
-      return;
-    modalState.value = {
-      ...modalState.value,
-      props: {
-        ...modalState.value.props,
-        ...props
-      }
-    };
-  }
-  return {
-    open,
-    close,
-    reset,
-    patch,
-    isOpen
-  };
-}
-createSharedComposable(_useModal);
-const modals_bidRKewKK5 = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
-  const modalState = shallowRef({
-    component: "div",
-    props: {}
-  });
-  nuxtApp.vueApp.provide(modalInjectionKey, modalState);
-});
-const inlineConfig = {
-  "nuxt": {},
-  "ui": {
-    "primary": "green",
-    "gray": "cool",
-    "colors": [
-      "red",
-      "orange",
-      "amber",
-      "yellow",
-      "lime",
-      "green",
-      "emerald",
-      "teal",
-      "cyan",
-      "sky",
-      "blue",
-      "indigo",
-      "violet",
-      "purple",
-      "fuchsia",
-      "pink",
-      "rose",
-      "primary"
-    ],
-    "strategy": "merge"
-  }
-};
-const appConfig = /* @__PURE__ */ defuFn(inlineConfig);
-function useAppConfig() {
-  const nuxtApp = useNuxtApp();
-  if (!nuxtApp._appConfig) {
-    nuxtApp._appConfig = klona(appConfig);
-  }
-  return nuxtApp._appConfig;
-}
-const customTwMerge = extendTailwindMerge({
-  extend: {
-    classGroups: {
-      icons: [(classPart) => /^i-/.test(classPart)]
-    }
-  }
-});
-const defuTwMerge = createDefu((obj, key, value, namespace) => {
-  if (namespace === "default" || namespace.startsWith("default.")) {
-    return false;
-  }
-  if (namespace === "popper" || namespace.startsWith("popper.")) {
-    return false;
-  }
-  if (namespace.endsWith("avatar") && key === "size") {
-    return false;
-  }
-  if (namespace.endsWith("chip") && key === "size") {
-    return false;
-  }
-  if (namespace.endsWith("badge") && key === "size" || key === "color" || key === "variant") {
-    return false;
-  }
-  if (typeof obj[key] === "string" && typeof value === "string" && obj[key] && value) {
-    obj[key] = customTwMerge(obj[key], value);
-    return true;
-  }
-});
-function mergeConfig(strategy, ...configs) {
-  if (strategy === "override") {
-    return defu({}, ...configs);
-  }
-  return defuTwMerge({}, ...configs);
-}
-function hexToRgb(hex) {
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function(_, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}` : null;
-}
-const _inherit = "inherit";
-const _current = "currentColor";
-const _transparent = "transparent";
-const _black = "#000";
-const _white = "#fff";
-const _slate = { "50": "#f8fafc", "100": "#f1f5f9", "200": "#e2e8f0", "300": "#cbd5e1", "400": "#94a3b8", "500": "#64748b", "600": "#475569", "700": "#334155", "800": "#1e293b", "900": "#0f172a", "950": "#020617" };
-const _gray = { "50": "rgb(var(--color-gray-50) / <alpha-value>)", "100": "rgb(var(--color-gray-100) / <alpha-value>)", "200": "rgb(var(--color-gray-200) / <alpha-value>)", "300": "rgb(var(--color-gray-300) / <alpha-value>)", "400": "rgb(var(--color-gray-400) / <alpha-value>)", "500": "rgb(var(--color-gray-500) / <alpha-value>)", "600": "rgb(var(--color-gray-600) / <alpha-value>)", "700": "rgb(var(--color-gray-700) / <alpha-value>)", "800": "rgb(var(--color-gray-800) / <alpha-value>)", "900": "rgb(var(--color-gray-900) / <alpha-value>)", "950": "rgb(var(--color-gray-950) / <alpha-value>)" };
-const _zinc = { "50": "#fafafa", "100": "#f4f4f5", "200": "#e4e4e7", "300": "#d4d4d8", "400": "#a1a1aa", "500": "#71717a", "600": "#52525b", "700": "#3f3f46", "800": "#27272a", "900": "#18181b", "950": "#09090b" };
-const _neutral = { "50": "#fafafa", "100": "#f5f5f5", "200": "#e5e5e5", "300": "#d4d4d4", "400": "#a3a3a3", "500": "#737373", "600": "#525252", "700": "#404040", "800": "#262626", "900": "#171717", "950": "#0a0a0a" };
-const _stone = { "50": "#fafaf9", "100": "#f5f5f4", "200": "#e7e5e4", "300": "#d6d3d1", "400": "#a8a29e", "500": "#78716c", "600": "#57534e", "700": "#44403c", "800": "#292524", "900": "#1c1917", "950": "#0c0a09" };
-const _red = { "50": "#fef2f2", "100": "#fee2e2", "200": "#fecaca", "300": "#fca5a5", "400": "#f87171", "500": "#ef4444", "600": "#dc2626", "700": "#b91c1c", "800": "#991b1b", "900": "#7f1d1d", "950": "#450a0a" };
-const _orange = { "50": "#fff7ed", "100": "#ffedd5", "200": "#fed7aa", "300": "#fdba74", "400": "#fb923c", "500": "#f97316", "600": "#ea580c", "700": "#c2410c", "800": "#9a3412", "900": "#7c2d12", "950": "#431407" };
-const _amber = { "50": "#fffbeb", "100": "#fef3c7", "200": "#fde68a", "300": "#fcd34d", "400": "#fbbf24", "500": "#f59e0b", "600": "#d97706", "700": "#b45309", "800": "#92400e", "900": "#78350f", "950": "#451a03" };
-const _yellow = { "50": "#fefce8", "100": "#fef9c3", "200": "#fef08a", "300": "#fde047", "400": "#facc15", "500": "#eab308", "600": "#ca8a04", "700": "#a16207", "800": "#854d0e", "900": "#713f12", "950": "#422006" };
-const _lime = { "50": "#f7fee7", "100": "#ecfccb", "200": "#d9f99d", "300": "#bef264", "400": "#a3e635", "500": "#84cc16", "600": "#65a30d", "700": "#4d7c0f", "800": "#3f6212", "900": "#365314", "950": "#1a2e05" };
-const _green = { "50": "#f0fdf4", "100": "#dcfce7", "200": "#bbf7d0", "300": "#86efac", "400": "#4ade80", "500": "#22c55e", "600": "#16a34a", "700": "#15803d", "800": "#166534", "900": "#14532d", "950": "#052e16" };
-const _emerald = { "50": "#ecfdf5", "100": "#d1fae5", "200": "#a7f3d0", "300": "#6ee7b7", "400": "#34d399", "500": "#10b981", "600": "#059669", "700": "#047857", "800": "#065f46", "900": "#064e3b", "950": "#022c22" };
-const _teal = { "50": "#f0fdfa", "100": "#ccfbf1", "200": "#99f6e4", "300": "#5eead4", "400": "#2dd4bf", "500": "#14b8a6", "600": "#0d9488", "700": "#0f766e", "800": "#115e59", "900": "#134e4a", "950": "#042f2e" };
-const _cyan = { "50": "#ecfeff", "100": "#cffafe", "200": "#a5f3fc", "300": "#67e8f9", "400": "#22d3ee", "500": "#06b6d4", "600": "#0891b2", "700": "#0e7490", "800": "#155e75", "900": "#164e63", "950": "#083344" };
-const _sky = { "50": "#f0f9ff", "100": "#e0f2fe", "200": "#bae6fd", "300": "#7dd3fc", "400": "#38bdf8", "500": "#0ea5e9", "600": "#0284c7", "700": "#0369a1", "800": "#075985", "900": "#0c4a6e", "950": "#082f49" };
-const _blue = { "50": "#eff6ff", "100": "#dbeafe", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a", "950": "#172554" };
-const _indigo = { "50": "#eef2ff", "100": "#e0e7ff", "200": "#c7d2fe", "300": "#a5b4fc", "400": "#818cf8", "500": "#6366f1", "600": "#4f46e5", "700": "#4338ca", "800": "#3730a3", "900": "#312e81", "950": "#1e1b4b" };
-const _violet = { "50": "#f5f3ff", "100": "#ede9fe", "200": "#ddd6fe", "300": "#c4b5fd", "400": "#a78bfa", "500": "#8b5cf6", "600": "#7c3aed", "700": "#6d28d9", "800": "#5b21b6", "900": "#4c1d95", "950": "#2e1065" };
-const _purple = { "50": "#faf5ff", "100": "#f3e8ff", "200": "#e9d5ff", "300": "#d8b4fe", "400": "#c084fc", "500": "#a855f7", "600": "#9333ea", "700": "#7e22ce", "800": "#6b21a8", "900": "#581c87", "950": "#3b0764" };
-const _fuchsia = { "50": "#fdf4ff", "100": "#fae8ff", "200": "#f5d0fe", "300": "#f0abfc", "400": "#e879f9", "500": "#d946ef", "600": "#c026d3", "700": "#a21caf", "800": "#86198f", "900": "#701a75", "950": "#4a044e" };
-const _pink = { "50": "#fdf2f8", "100": "#fce7f3", "200": "#fbcfe8", "300": "#f9a8d4", "400": "#f472b6", "500": "#ec4899", "600": "#db2777", "700": "#be185d", "800": "#9d174d", "900": "#831843", "950": "#500724" };
-const _rose = { "50": "#fff1f2", "100": "#ffe4e6", "200": "#fecdd3", "300": "#fda4af", "400": "#fb7185", "500": "#f43f5e", "600": "#e11d48", "700": "#be123c", "800": "#9f1239", "900": "#881337", "950": "#4c0519" };
-const _primary = { "50": "rgb(var(--color-primary-50) / <alpha-value>)", "100": "rgb(var(--color-primary-100) / <alpha-value>)", "200": "rgb(var(--color-primary-200) / <alpha-value>)", "300": "rgb(var(--color-primary-300) / <alpha-value>)", "400": "rgb(var(--color-primary-400) / <alpha-value>)", "500": "rgb(var(--color-primary-500) / <alpha-value>)", "600": "rgb(var(--color-primary-600) / <alpha-value>)", "700": "rgb(var(--color-primary-700) / <alpha-value>)", "800": "rgb(var(--color-primary-800) / <alpha-value>)", "900": "rgb(var(--color-primary-900) / <alpha-value>)", "950": "rgb(var(--color-primary-950) / <alpha-value>)", "DEFAULT": "rgb(var(--color-primary-DEFAULT) / <alpha-value>)" };
-const _cool = { "50": "#f9fafb", "100": "#f3f4f6", "200": "#e5e7eb", "300": "#d1d5db", "400": "#9ca3af", "500": "#6b7280", "600": "#4b5563", "700": "#374151", "800": "#1f2937", "900": "#111827", "950": "#030712" };
-const config = { "inherit": _inherit, "current": _current, "transparent": _transparent, "black": _black, "white": _white, "slate": _slate, "gray": _gray, "zinc": _zinc, "neutral": _neutral, "stone": _stone, "red": _red, "orange": _orange, "amber": _amber, "yellow": _yellow, "lime": _lime, "green": _green, "emerald": _emerald, "teal": _teal, "cyan": _cyan, "sky": _sky, "blue": _blue, "indigo": _indigo, "violet": _violet, "purple": _purple, "fuchsia": _fuchsia, "pink": _pink, "rose": _rose, "primary": _primary, "cool": _cool };
-const colors_244lXBzhnM = /* @__PURE__ */ defineNuxtPlugin(() => {
-  const appConfig2 = useAppConfig();
-  useNuxtApp();
-  const root = computed(() => {
-    const primary = config[appConfig2.ui.primary];
-    const gray = config[appConfig2.ui.gray];
-    if (!primary) {
-      console.warn(`[@nuxt/ui] Primary color '${appConfig2.ui.primary}' not found in Tailwind config`);
-    }
-    if (!gray) {
-      console.warn(`[@nuxt/ui] Gray color '${appConfig2.ui.gray}' not found in Tailwind config`);
-    }
-    return `:root {
-${Object.entries(primary || config.green).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join("\n")}
---color-primary-DEFAULT: var(--color-primary-500);
-
-${Object.entries(gray || config.cool).map(([key, value]) => `--color-gray-${key}: ${hexToRgb(value)};`).join("\n")}
-}
-
-.dark {
-  --color-primary-DEFAULT: var(--color-primary-400);
-}
-`;
-  });
-  const headData = {
-    style: [{
-      innerHTML: () => root.value,
-      tagPriority: -2,
-      id: "nuxt-ui-colors"
-    }]
-  };
-  useHead(headData);
-});
 const useStateKeyPrefix = "$s";
 function useState(...args) {
   const autoKey = typeof args[args.length - 1] === "string" ? args.pop() : void 0;
@@ -1342,40 +1078,38 @@ function useState(...args) {
   }
   return state;
 }
-const preference = "system";
-const plugin_server_ano7jnMEqi = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
+function useRequestEvent(nuxtApp = useNuxtApp()) {
   var _a;
-  const colorMode = ((_a = nuxtApp.ssrContext) == null ? void 0 : _a.islandContext) ? ref({}) : useState("color-mode", () => reactive({
-    preference,
-    value: preference,
-    unknown: true,
-    forced: false
-  })).value;
-  const htmlAttrs = {};
+  return (_a = nuxtApp.ssrContext) == null ? void 0 : _a.event;
+}
+function definePayloadReducer(name, reduce) {
   {
-    useHead({ htmlAttrs });
+    useNuxtApp().ssrContext._payloadReducers[name] = reduce;
   }
-  useRouter().afterEach((to) => {
-    const forcedColorMode = to.meta.colorMode;
-    if (forcedColorMode && forcedColorMode !== "system") {
-      colorMode.value = htmlAttrs["data-color-mode-forced"] = forcedColorMode;
-      colorMode.forced = true;
-    } else if (forcedColorMode === "system") {
-      console.warn("You cannot force the colorMode to system at the page level.");
-    }
-  });
-  nuxtApp.provide("colorMode", colorMode);
+}
+const clientOnlySymbol = Symbol.for("nuxt:client-only");
+defineComponent({
+  name: "ClientOnly",
+  inheritAttrs: false,
+  props: ["fallback", "placeholder", "placeholderTag", "fallbackTag"],
+  setup(_, { slots, attrs }) {
+    const mounted = ref(false);
+    provide(clientOnlySymbol, true);
+    return (props) => {
+      var _a;
+      if (mounted.value) {
+        return (_a = slots.default) == null ? void 0 : _a.call(slots);
+      }
+      const slot = slots.fallback || slots.placeholder;
+      if (slot) {
+        return slot();
+      }
+      const fallbackStr = props.fallback || props.placeholder || "";
+      const fallbackTag = props.fallbackTag || props.placeholderTag || "span";
+      return createElementBlock(fallbackTag, attrs, fallbackStr);
+    };
+  }
 });
-const plugins = [
-  unhead_KgADcZ0jPj,
-  plugin,
-  revive_payload_server_eJ33V7gbc6,
-  components_plugin_KR1HBZs4kY,
-  slideovers_LDumGYo2KH,
-  modals_bidRKewKK5,
-  colors_244lXBzhnM,
-  plugin_server_ano7jnMEqi
-];
 const firstNonUndefined = (...args) => args.find((arg) => arg !== void 0);
 // @__NO_SIDE_EFFECTS__
 function defineNuxtLink(options) {
@@ -1633,7 +1367,442 @@ function applyTrailingSlashBehavior(to, trailingSlash) {
   }
   return normalizeFn(to, true);
 }
-const _imports_0 = publicAssetsURL("/images/genixl.jpg");
+const inlineConfig = {
+  "nuxt": {},
+  "ui": {
+    "primary": "green",
+    "gray": "cool",
+    "colors": [
+      "red",
+      "orange",
+      "amber",
+      "yellow",
+      "lime",
+      "green",
+      "emerald",
+      "teal",
+      "cyan",
+      "sky",
+      "blue",
+      "indigo",
+      "violet",
+      "purple",
+      "fuchsia",
+      "pink",
+      "rose",
+      "brand",
+      "primary"
+    ],
+    "strategy": "merge"
+  }
+};
+const __appConfig = /* @__PURE__ */ defuFn(inlineConfig);
+function useAppConfig() {
+  const nuxtApp = useNuxtApp();
+  if (!nuxtApp._appConfig) {
+    nuxtApp._appConfig = klona(__appConfig);
+  }
+  return nuxtApp._appConfig;
+}
+const _0_siteConfig_jtc2qNDx4l = /* @__PURE__ */ defineNuxtPlugin({
+  name: "nuxt-site-config:init",
+  enforce: "pre",
+  async setup(nuxtApp) {
+    var _a, _b;
+    const stack = (_b = (_a = useRequestEvent()) == null ? void 0 : _a.context) == null ? void 0 : _b.siteConfig;
+    const state = useState("site-config");
+    {
+      nuxtApp.hooks.hook("app:rendered", () => {
+        state.value = stack == null ? void 0 : stack.get({
+          debug: (/* @__PURE__ */ useRuntimeConfig())["nuxt-site-config"].debug,
+          resolveRefs: true
+        });
+      });
+    }
+    return {
+      provide: {
+        nuxtSiteConfig: stack
+      }
+    };
+  }
+});
+const reducers = {
+  NuxtError: (data) => isNuxtError(data) && data.toJSON(),
+  EmptyShallowRef: (data) => isRef(data) && isShallow(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_"),
+  EmptyRef: (data) => isRef(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_"),
+  ShallowRef: (data) => isRef(data) && isShallow(data) && data.value,
+  ShallowReactive: (data) => isReactive(data) && isShallow(data) && toRaw(data),
+  Ref: (data) => isRef(data) && data.value,
+  Reactive: (data) => isReactive(data) && toRaw(data)
+};
+const revive_payload_server_eJ33V7gbc6 = /* @__PURE__ */ defineNuxtPlugin({
+  name: "nuxt:revive-payload:server",
+  setup() {
+    for (const reducer in reducers) {
+      definePayloadReducer(reducer, reducers[reducer]);
+    }
+  }
+});
+const LazyIcon = defineAsyncComponent(() => import('./Icon-jMsWZLCR.mjs').then((r) => r["default"] || r.default || r));
+const LazyIconCSS = defineAsyncComponent(() => import('./IconCSS-BbRWRGcy.mjs').then((r) => r["default"] || r.default || r));
+const lazyGlobalComponents = [
+  ["Icon", LazyIcon],
+  ["IconCSS", LazyIconCSS]
+];
+const components_plugin_KR1HBZs4kY = /* @__PURE__ */ defineNuxtPlugin({
+  name: "nuxt:global-components",
+  setup(nuxtApp) {
+    for (const [name, component] of lazyGlobalComponents) {
+      nuxtApp.vueApp.component(name, component);
+      nuxtApp.vueApp.component("Lazy" + name, component);
+    }
+  }
+});
+const slidOverInjectionKey = Symbol("nuxt-ui.slideover");
+function _useSlideover() {
+  const slideoverState = inject(slidOverInjectionKey);
+  const isOpen = ref(false);
+  function open(component, props) {
+    if (!slideoverState) {
+      throw new Error("useSlideover() is called without provider");
+    }
+    slideoverState.value = {
+      component,
+      props: props ?? {}
+    };
+    isOpen.value = true;
+  }
+  async function close() {
+    if (!slideoverState)
+      return;
+    isOpen.value = false;
+  }
+  function reset() {
+    slideoverState.value = {
+      component: "div",
+      props: {}
+    };
+  }
+  function patch(props) {
+    if (!slideoverState)
+      return;
+    slideoverState.value = {
+      ...slideoverState.value,
+      props: {
+        ...slideoverState.value.props,
+        ...props
+      }
+    };
+  }
+  return {
+    open,
+    close,
+    reset,
+    patch,
+    isOpen
+  };
+}
+createSharedComposable(_useSlideover);
+const slideovers_LDumGYo2KH = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
+  const slideoverState = shallowRef({
+    component: "div",
+    props: {}
+  });
+  nuxtApp.vueApp.provide(slidOverInjectionKey, slideoverState);
+});
+const modalInjectionKey = Symbol("nuxt-ui.modal");
+function _useModal() {
+  const modalState = inject(modalInjectionKey);
+  const isOpen = ref(false);
+  function open(component, props) {
+    if (!modalState) {
+      throw new Error("useModal() is called without provider");
+    }
+    modalState.value = {
+      component,
+      props: props ?? {}
+    };
+    isOpen.value = true;
+  }
+  async function close() {
+    if (!modalState)
+      return;
+    isOpen.value = false;
+  }
+  function reset() {
+    modalState.value = {
+      component: "div",
+      props: {}
+    };
+  }
+  function patch(props) {
+    if (!modalState)
+      return;
+    modalState.value = {
+      ...modalState.value,
+      props: {
+        ...modalState.value.props,
+        ...props
+      }
+    };
+  }
+  return {
+    open,
+    close,
+    reset,
+    patch,
+    isOpen
+  };
+}
+createSharedComposable(_useModal);
+const modals_bidRKewKK5 = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
+  const modalState = shallowRef({
+    component: "div",
+    props: {}
+  });
+  nuxtApp.vueApp.provide(modalInjectionKey, modalState);
+});
+extendTailwindMerge({
+  extend: {
+    classGroups: {
+      icons: [(classPart) => /^i-/.test(classPart)]
+    }
+  }
+});
+function hexToRgb(hex) {
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function(_, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}` : null;
+}
+const _inherit = "inherit";
+const _current = "currentColor";
+const _transparent = "transparent";
+const _black = "#000";
+const _white = "#fff";
+const _slate = { "50": "#f8fafc", "100": "#f1f5f9", "200": "#e2e8f0", "300": "#cbd5e1", "400": "#94a3b8", "500": "#64748b", "600": "#475569", "700": "#334155", "800": "#1e293b", "900": "#0f172a", "950": "#020617" };
+const _gray = { "50": "rgb(var(--color-gray-50) / <alpha-value>)", "100": "rgb(var(--color-gray-100) / <alpha-value>)", "200": "rgb(var(--color-gray-200) / <alpha-value>)", "300": "rgb(var(--color-gray-300) / <alpha-value>)", "400": "rgb(var(--color-gray-400) / <alpha-value>)", "500": "rgb(var(--color-gray-500) / <alpha-value>)", "600": "rgb(var(--color-gray-600) / <alpha-value>)", "700": "rgb(var(--color-gray-700) / <alpha-value>)", "800": "rgb(var(--color-gray-800) / <alpha-value>)", "900": "rgb(var(--color-gray-900) / <alpha-value>)", "950": "rgb(var(--color-gray-950) / <alpha-value>)" };
+const _zinc = { "50": "#fafafa", "100": "#f4f4f5", "200": "#e4e4e7", "300": "#d4d4d8", "400": "#a1a1aa", "500": "#71717a", "600": "#52525b", "700": "#3f3f46", "800": "#27272a", "900": "#18181b", "950": "#09090b" };
+const _neutral = { "50": "#fafafa", "100": "#f5f5f5", "200": "#e5e5e5", "300": "#d4d4d4", "400": "#a3a3a3", "500": "#737373", "600": "#525252", "700": "#404040", "800": "#262626", "900": "#171717", "950": "#0a0a0a" };
+const _stone = { "50": "#fafaf9", "100": "#f5f5f4", "200": "#e7e5e4", "300": "#d6d3d1", "400": "#a8a29e", "500": "#78716c", "600": "#57534e", "700": "#44403c", "800": "#292524", "900": "#1c1917", "950": "#0c0a09" };
+const _red = { "50": "#fef2f2", "100": "#fee2e2", "200": "#fecaca", "300": "#fca5a5", "400": "#f87171", "500": "#ef4444", "600": "#dc2626", "700": "#b91c1c", "800": "#991b1b", "900": "#7f1d1d", "950": "#450a0a" };
+const _orange = { "50": "#fff7ed", "100": "#ffedd5", "200": "#fed7aa", "300": "#fdba74", "400": "#fb923c", "500": "#f97316", "600": "#ea580c", "700": "#c2410c", "800": "#9a3412", "900": "#7c2d12", "950": "#431407" };
+const _amber = { "50": "#fffbeb", "100": "#fef3c7", "200": "#fde68a", "300": "#fcd34d", "400": "#fbbf24", "500": "#f59e0b", "600": "#d97706", "700": "#b45309", "800": "#92400e", "900": "#78350f", "950": "#451a03" };
+const _yellow = { "50": "#fefce8", "100": "#fef9c3", "200": "#fef08a", "300": "#fde047", "400": "#facc15", "500": "#eab308", "600": "#ca8a04", "700": "#a16207", "800": "#854d0e", "900": "#713f12", "950": "#422006" };
+const _lime = { "50": "#f7fee7", "100": "#ecfccb", "200": "#d9f99d", "300": "#bef264", "400": "#a3e635", "500": "#84cc16", "600": "#65a30d", "700": "#4d7c0f", "800": "#3f6212", "900": "#365314", "950": "#1a2e05" };
+const _green = { "50": "#f0fdf4", "100": "#dcfce7", "200": "#bbf7d0", "300": "#86efac", "400": "#4ade80", "500": "#22c55e", "600": "#16a34a", "700": "#15803d", "800": "#166534", "900": "#14532d", "950": "#052e16" };
+const _emerald = { "50": "#ecfdf5", "100": "#d1fae5", "200": "#a7f3d0", "300": "#6ee7b7", "400": "#34d399", "500": "#10b981", "600": "#059669", "700": "#047857", "800": "#065f46", "900": "#064e3b", "950": "#022c22" };
+const _teal = { "50": "#f0fdfa", "100": "#ccfbf1", "200": "#99f6e4", "300": "#5eead4", "400": "#2dd4bf", "500": "#14b8a6", "600": "#0d9488", "700": "#0f766e", "800": "#115e59", "900": "#134e4a", "950": "#042f2e" };
+const _cyan = { "50": "#ecfeff", "100": "#cffafe", "200": "#a5f3fc", "300": "#67e8f9", "400": "#22d3ee", "500": "#06b6d4", "600": "#0891b2", "700": "#0e7490", "800": "#155e75", "900": "#164e63", "950": "#083344" };
+const _sky = { "50": "#f0f9ff", "100": "#e0f2fe", "200": "#bae6fd", "300": "#7dd3fc", "400": "#38bdf8", "500": "#0ea5e9", "600": "#0284c7", "700": "#0369a1", "800": "#075985", "900": "#0c4a6e", "950": "#082f49" };
+const _blue = { "50": "#eff6ff", "100": "#dbeafe", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a", "950": "#172554" };
+const _indigo = { "50": "#eef2ff", "100": "#e0e7ff", "200": "#c7d2fe", "300": "#a5b4fc", "400": "#818cf8", "500": "#6366f1", "600": "#4f46e5", "700": "#4338ca", "800": "#3730a3", "900": "#312e81", "950": "#1e1b4b" };
+const _violet = { "50": "#f5f3ff", "100": "#ede9fe", "200": "#ddd6fe", "300": "#c4b5fd", "400": "#a78bfa", "500": "#8b5cf6", "600": "#7c3aed", "700": "#6d28d9", "800": "#5b21b6", "900": "#4c1d95", "950": "#2e1065" };
+const _purple = { "50": "#faf5ff", "100": "#f3e8ff", "200": "#e9d5ff", "300": "#d8b4fe", "400": "#c084fc", "500": "#a855f7", "600": "#9333ea", "700": "#7e22ce", "800": "#6b21a8", "900": "#581c87", "950": "#3b0764" };
+const _fuchsia = { "50": "#fdf4ff", "100": "#fae8ff", "200": "#f5d0fe", "300": "#f0abfc", "400": "#e879f9", "500": "#d946ef", "600": "#c026d3", "700": "#a21caf", "800": "#86198f", "900": "#701a75", "950": "#4a044e" };
+const _pink = { "50": "#fdf2f8", "100": "#fce7f3", "200": "#fbcfe8", "300": "#f9a8d4", "400": "#f472b6", "500": "#ec4899", "600": "#db2777", "700": "#be185d", "800": "#9d174d", "900": "#831843", "950": "#500724" };
+const _rose = { "50": "#fff1f2", "100": "#ffe4e6", "200": "#fecdd3", "300": "#fda4af", "400": "#fb7185", "500": "#f43f5e", "600": "#e11d48", "700": "#be123c", "800": "#9f1239", "900": "#881337", "950": "#4c0519" };
+const _brand = { "green": "#16a34a", "greenSoft": "#4ade80", "orange": "#f97316", "orangeSoft": "#fed7aa", "blue": "#2563eb", "blueSoft": "#93c5fd", "surfaceLight": "#f9fafb", "surfaceDark": "#020617" };
+const _primary = { "50": "rgb(var(--color-primary-50) / <alpha-value>)", "100": "rgb(var(--color-primary-100) / <alpha-value>)", "200": "rgb(var(--color-primary-200) / <alpha-value>)", "300": "rgb(var(--color-primary-300) / <alpha-value>)", "400": "rgb(var(--color-primary-400) / <alpha-value>)", "500": "rgb(var(--color-primary-500) / <alpha-value>)", "600": "rgb(var(--color-primary-600) / <alpha-value>)", "700": "rgb(var(--color-primary-700) / <alpha-value>)", "800": "rgb(var(--color-primary-800) / <alpha-value>)", "900": "rgb(var(--color-primary-900) / <alpha-value>)", "950": "rgb(var(--color-primary-950) / <alpha-value>)", "DEFAULT": "rgb(var(--color-primary-DEFAULT) / <alpha-value>)" };
+const _cool = { "50": "#f9fafb", "100": "#f3f4f6", "200": "#e5e7eb", "300": "#d1d5db", "400": "#9ca3af", "500": "#6b7280", "600": "#4b5563", "700": "#374151", "800": "#1f2937", "900": "#111827", "950": "#030712" };
+const config = { "inherit": _inherit, "current": _current, "transparent": _transparent, "black": _black, "white": _white, "slate": _slate, "gray": _gray, "zinc": _zinc, "neutral": _neutral, "stone": _stone, "red": _red, "orange": _orange, "amber": _amber, "yellow": _yellow, "lime": _lime, "green": _green, "emerald": _emerald, "teal": _teal, "cyan": _cyan, "sky": _sky, "blue": _blue, "indigo": _indigo, "violet": _violet, "purple": _purple, "fuchsia": _fuchsia, "pink": _pink, "rose": _rose, "brand": _brand, "primary": _primary, "cool": _cool };
+const colors_244lXBzhnM = /* @__PURE__ */ defineNuxtPlugin(() => {
+  const appConfig = useAppConfig();
+  useNuxtApp();
+  const root = computed(() => {
+    const primary = config[appConfig.ui.primary];
+    const gray = config[appConfig.ui.gray];
+    if (!primary) {
+      console.warn(`[@nuxt/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`);
+    }
+    if (!gray) {
+      console.warn(`[@nuxt/ui] Gray color '${appConfig.ui.gray}' not found in Tailwind config`);
+    }
+    return `:root {
+${Object.entries(primary || config.green).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join("\n")}
+--color-primary-DEFAULT: var(--color-primary-500);
+
+${Object.entries(gray || config.cool).map(([key, value]) => `--color-gray-${key}: ${hexToRgb(value)};`).join("\n")}
+}
+
+.dark {
+  --color-primary-DEFAULT: var(--color-primary-400);
+}
+`;
+  });
+  const headData = {
+    style: [{
+      innerHTML: () => root.value,
+      tagPriority: -2,
+      id: "nuxt-ui-colors"
+    }]
+  };
+  useHead(headData);
+});
+const preference = "system";
+const plugin_server_ano7jnMEqi = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
+  var _a;
+  const colorMode = ((_a = nuxtApp.ssrContext) == null ? void 0 : _a.islandContext) ? ref({}) : useState("color-mode", () => reactive({
+    preference,
+    value: preference,
+    unknown: true,
+    forced: false
+  })).value;
+  const htmlAttrs = {};
+  {
+    useHead({ htmlAttrs });
+  }
+  useRouter().afterEach((to) => {
+    const forcedColorMode = to.meta.colorMode;
+    if (forcedColorMode && forcedColorMode !== "system") {
+      colorMode.value = htmlAttrs["data-color-mode-forced"] = forcedColorMode;
+      colorMode.forced = true;
+    } else if (forcedColorMode === "system") {
+      console.warn("You cannot force the colorMode to system at the page level.");
+    }
+  });
+  nuxtApp.provide("colorMode", colorMode);
+});
+const plugins = [
+  unhead_KgADcZ0jPj,
+  plugin,
+  _0_siteConfig_jtc2qNDx4l,
+  revive_payload_server_eJ33V7gbc6,
+  components_plugin_KR1HBZs4kY,
+  slideovers_LDumGYo2KH,
+  modals_bidRKewKK5,
+  colors_244lXBzhnM,
+  plugin_server_ano7jnMEqi
+];
+const __nuxt_component_0 = defineComponent({
+  name: "ServerPlaceholder",
+  render() {
+    return createElementBlock("div");
+  }
+});
+const useAuth = () => {
+  const user = useState("auth_user", () => null);
+  const loading = useState("auth_loading", () => false);
+  const error = useState("auth_error", () => "");
+  useRouter();
+  const fetchUserProfile = async () => {
+    try {
+      const session = localStorage.getItem("session");
+      if (!session) return false;
+      const sessionData = JSON.parse(session);
+      const response = await $fetch("/api/profile", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${sessionData.access_token}`
+        }
+      });
+      if (response == null ? void 0 : response.error) return false;
+      if (response && user.value) {
+        user.value.role = response.role;
+        localStorage.setItem("user", JSON.stringify(user.value));
+      }
+      return true;
+    } catch (err) {
+      console.error("Failed to fetch profile:", err);
+      return false;
+    }
+  };
+  const initUser = async () => {
+    return;
+  };
+  const login = async (email, password, username) => {
+    var _a, _b;
+    loading.value = true;
+    error.value = "";
+    try {
+      const response = await $fetch("/api/login", {
+        method: "POST",
+        body: { email, password, username }
+      });
+      if (response == null ? void 0 : response.error) {
+        error.value = response.error;
+        return false;
+      }
+      if (response == null ? void 0 : response.user) {
+        const userData = {
+          id: response.user.id,
+          email: response.user.email,
+          username: ((_a = response.user.user_metadata) == null ? void 0 : _a.username) || response.user.email,
+          role: null
+        };
+        user.value = userData;
+        localStorage.setItem("user", JSON.stringify(userData));
+        if (response.session) {
+          localStorage.setItem("session", JSON.stringify(response.session));
+          await fetchUserProfile();
+        }
+        return true;
+      }
+      return false;
+    } catch (err) {
+      error.value = ((_b = err.data) == null ? void 0 : _b.error) || err.message || "Login failed";
+      console.error("Login error:", err);
+      return false;
+    } finally {
+      loading.value = false;
+    }
+  };
+  const signup = async (email, password, username) => {
+    var _a;
+    loading.value = true;
+    error.value = "";
+    try {
+      const response = await $fetch("/api/signup", {
+        method: "POST",
+        body: { email, password, username }
+      });
+      if (response == null ? void 0 : response.error) {
+        error.value = response.error;
+        return false;
+      }
+      return true;
+    } catch (err) {
+      error.value = ((_a = err.data) == null ? void 0 : _a.error) || err.message || "Signup failed";
+      console.error("Signup error:", err);
+      return false;
+    } finally {
+      loading.value = false;
+    }
+  };
+  const logout = () => {
+    user.value = null;
+    localStorage.removeItem("user");
+    localStorage.removeItem("session");
+    error.value = "";
+  };
+  return {
+    user: readonly(user),
+    loading: readonly(loading),
+    error: readonly(error),
+    initUser,
+    login,
+    signup,
+    logout,
+    fetchUserProfile
+  };
+};
+const _imports_0 = "" + __buildAssetsURL("genixl2.937a3EQ4.png");
+const isDark = ref(false);
+function applyTheme(dark) {
+  return;
+}
+function useTheme() {
+  const toggleTheme = () => {
+    isDark.value = !isDark.value;
+    applyTheme(isDark.value);
+  };
+  return {
+    isDark,
+    toggleTheme
+  };
+}
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -1645,19 +1814,19 @@ const _sfc_main$3 = {
   __name: "LandingHeader",
   __ssrInlineRender: true,
   setup(__props) {
-    const user = ref(null);
     const showMobileMenu = ref(false);
     const showLogoutMenu = ref(false);
     const route = useRoute$1();
     useRouter$1();
+    const { isDark: isDark2 } = useTheme();
+    const { user } = useAuth();
     const navigationLinks = [
-      { label: "Home", to: "/", icon: "🏠" },
-      { label: "About Us", to: "/", scrollTo: "about-us", icon: "ℹ️" },
-      { label: "Our Products", to: "/", scrollTo: "our-products", icon: "💻" },
-      // Changed to laptop for software
-      { label: "Our Services", to: "/our-services", icon: "🧑‍💻" },
-      // Changed to developer for software
-      { label: "Contact Us", to: "/contact-us", icon: "✉️" }
+      { label: "Overview", to: "/", scrollTo: "hero", tint: "from-brand-green to-brand-greenSoft" },
+      { label: "Services", to: "/our-services", tint: "from-brand-orange to-brand-orangeSoft" },
+      { label: "Products", to: "/products", tint: "from-brand-blue to-brand-blueSoft" },
+      { label: "Industries", to: "/industries", tint: "from-brand-green to-brand-orange" },
+      { label: "About", to: "/about", tint: "from-slate-500 to-slate-700" },
+      { label: "Contact", to: "/contact-us", tint: "from-brand-blue to-brand-green" }
     ];
     function isActive(link) {
       if (link.scrollTo) {
@@ -1667,58 +1836,49 @@ const _sfc_main$3 = {
     }
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0$1;
-      _push(`<header${ssrRenderAttrs(mergeProps({ class: "py-4 px-4 md:px-8 bg-white dark:bg-gray-800 shadow" }, _attrs))} data-v-22556cfb><nav class="flex justify-between items-center max-w-7xl mx-auto" data-v-22556cfb>`);
+      _push(`<header${ssrRenderAttrs(mergeProps({ class: "sticky top-0 z-40 border-b border-white/10 bg-white/80 backdrop-blur-md dark:bg-slate-900/80" }, _attrs))} data-v-e9ae0a52><nav class="section-shell flex items-center justify-between py-3" data-v-e9ae0a52>`);
       _push(ssrRenderComponent(_component_NuxtLink, {
         to: "/",
-        class: "flex items-center gap-2"
+        class: "flex items-center gap-3"
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<img${ssrRenderAttr("src", _imports_0)} alt="Genixl Logo" class="h-20 w-auto rounded shadow" data-v-22556cfb${_scopeId}><span class="sr-only" data-v-22556cfb${_scopeId}>Genixl Home</span>`);
+            _push2(`<img${ssrRenderAttr("src", _imports_0)} alt="Genixl Logo" class="h-10 w-10 rounded-xl object-contain flex-shrink-0" data-v-e9ae0a52${_scopeId}><div class="flex flex-col leading-tight" data-v-e9ae0a52${_scopeId}><span class="text-sm font-semibold tracking-wide text-gray-900 dark:text-gray-50" data-v-e9ae0a52${_scopeId}> Genixl </span><span class="text-xs text-gray-500 dark:text-gray-400" data-v-e9ae0a52${_scopeId}> Software &amp; digital products </span></div>`);
           } else {
             return [
               createVNode("img", {
                 src: _imports_0,
                 alt: "Genixl Logo",
-                class: "h-20 w-auto rounded shadow"
+                class: "h-10 w-10 rounded-xl object-contain flex-shrink-0"
               }),
-              createVNode("span", { class: "sr-only" }, "Genixl Home")
+              createVNode("div", { class: "flex flex-col leading-tight" }, [
+                createVNode("span", { class: "text-sm font-semibold tracking-wide text-gray-900 dark:text-gray-50" }, " Genixl "),
+                createVNode("span", { class: "text-xs text-gray-500 dark:text-gray-400" }, " Software & digital products ")
+              ])
             ];
           }
         }),
         _: 1
       }, _parent));
-      _push(`<ul class="hidden md:flex gap-6 items-center" data-v-22556cfb><!--[-->`);
+      _push(`<ul class="hidden items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-200 md:flex" data-v-e9ae0a52><!--[-->`);
       ssrRenderList(navigationLinks, (link) => {
-        _push(`<li data-v-22556cfb>`);
+        _push(`<li data-v-e9ae0a52>`);
         if (link.scrollTo) {
-          _push(`<button class="${ssrRenderClass([{ "bg-blue-50 dark:bg-emerald-900 text-green-700 dark:text-emerald-300 font-bold": isActive(link) }, "flex items-center gap-1 text-lg font-medium px-2 py-1 rounded transition-colors duration-200 text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-white"])}" data-v-22556cfb>`);
-          if (link.icon) {
-            _push(`<span class="text-xl" data-v-22556cfb>${ssrInterpolate(link.icon)}</span>`);
-          } else {
-            _push(`<!---->`);
-          }
-          _push(` ${ssrInterpolate(link.label)}</button>`);
+          _push(`<button class="${ssrRenderClass([isActive(link) ? "bg-brand-green/10 text-brand-green dark:bg-brand-green/15" : "hover:bg-slate-100 dark:hover:bg-slate-800", "group inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors"])}" data-v-e9ae0a52><span class="${ssrRenderClass([link.tint, "h-1.5 w-1.5 rounded-full bg-gradient-to-br"])}" data-v-e9ae0a52></span><span data-v-e9ae0a52>${ssrInterpolate(link.label)}</span></button>`);
         } else {
           _push(ssrRenderComponent(_component_NuxtLink, {
             to: link.to,
-            class: ["flex items-center gap-1 text-lg font-medium px-2 py-1 rounded transition-colors duration-200 text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-white", { "bg-blue-50 dark:bg-emerald-900 text-green-700 dark:text-emerald-300 font-bold": isActive(link) }]
+            class: ["group inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors", isActive(link) ? "bg-brand-green/10 text-brand-green dark:bg-brand-green/15" : "hover:bg-slate-100 dark:hover:bg-slate-800"]
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                if (link.icon) {
-                  _push2(`<span class="text-xl" data-v-22556cfb${_scopeId}>${ssrInterpolate(link.icon)}</span>`);
-                } else {
-                  _push2(`<!---->`);
-                }
-                _push2(` ${ssrInterpolate(link.label)}`);
+                _push2(`<span class="${ssrRenderClass([link.tint, "h-1.5 w-1.5 rounded-full bg-gradient-to-br"])}" data-v-e9ae0a52${_scopeId}></span><span data-v-e9ae0a52${_scopeId}>${ssrInterpolate(link.label)}</span>`);
               } else {
                 return [
-                  link.icon ? (openBlock(), createBlock("span", {
-                    key: 0,
-                    class: "text-xl"
-                  }, toDisplayString(link.icon), 1)) : createCommentVNode("", true),
-                  createTextVNode(" " + toDisplayString(link.label), 1)
+                  createVNode("span", {
+                    class: ["h-1.5 w-1.5 rounded-full bg-gradient-to-br", link.tint]
+                  }, null, 2),
+                  createVNode("span", null, toDisplayString(link.label), 1)
                 ];
               }
             }),
@@ -1727,72 +1887,82 @@ const _sfc_main$3 = {
         }
         _push(`</li>`);
       });
-      _push(`<!--]--></ul><div class="hidden md:flex items-center ml-4 relative" data-v-22556cfb>`);
-      if (user.value && user.value.username) {
-        _push(`<div class="relative" data-v-22556cfb><span class="ml-4 px-4 py-2 rounded bg-green-500 text-white font-semibold cursor-pointer select-none" data-v-22556cfb>${ssrInterpolate(user.value.username)}</span>`);
-        if (showLogoutMenu.value) {
-          _push(`<div class="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded shadow-lg z-50 border border-gray-100 dark:border-gray-700" data-v-22556cfb><button class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-b" data-v-22556cfb> Log out </button></div>`);
+      _push(`<!--]--></ul><div class="flex items-center gap-3" data-v-e9ae0a52><button type="button" class="relative flex h-8 w-14 items-center rounded-full border border-slate-200 bg-slate-100 px-1 text-xs font-medium text-slate-700 transition-colors dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" data-v-e9ae0a52><span class="${ssrRenderClass([unref(isDark2) ? "translate-x-6" : "", "pointer-events-none inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[0.65rem] font-semibold shadow-sm transition-transform dark:bg-slate-800"])}" data-v-e9ae0a52>${ssrInterpolate(unref(isDark2) ? "Dark" : "Light")}</span></button><div class="hidden items-center gap-2 md:flex" data-v-e9ae0a52>`);
+      if (unref(user) && unref(user).username) {
+        _push(`<!--[-->`);
+        if (unref(user).role === "admin") {
+          _push(ssrRenderComponent(_component_NuxtLink, {
+            to: "/admin",
+            class: "rounded-full border border-emerald-300/50 bg-emerald-100/50 px-3 py-1 text-xs font-semibold text-emerald-700 dark:border-emerald-500/50 dark:bg-emerald-900/30 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
+          }, {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(` Admin `);
+              } else {
+                return [
+                  createTextVNode(" Admin ")
+                ];
+              }
+            }),
+            _: 1
+          }, _parent));
         } else {
           _push(`<!---->`);
         }
-        _push(`</div>`);
+        _push(`<div class="relative" data-v-e9ae0a52><button type="button" class="rounded-full border border-brand-green/30 bg-brand-green/10 px-3 py-1 text-xs font-semibold text-brand-green hover:bg-brand-green/15" data-v-e9ae0a52>${ssrInterpolate(unref(user).username)}</button>`);
+        if (showLogoutMenu.value) {
+          _push(`<div class="absolute right-0 mt-2 w-40 rounded-xl border border-slate-100 bg-white p-1 text-sm shadow-lg dark:border-slate-700 dark:bg-slate-900" data-v-e9ae0a52><button type="button" class="w-full rounded-lg px-3 py-2 text-left text-red-500 hover:bg-red-50 dark:hover:bg-red-900/40" data-v-e9ae0a52> Sign out </button></div>`);
+        } else {
+          _push(`<!---->`);
+        }
+        _push(`</div><!--]-->`);
       } else {
         _push(ssrRenderComponent(_component_NuxtLink, {
           to: "/login",
-          class: "ml-4 px-4 py-2 rounded bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors duration-200"
+          class: "rounded-full bg-gradient-to-r from-brand-green to-brand-orange px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:shadow-md"
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(` Login`);
+              _push2(` Client portal `);
             } else {
               return [
-                createTextVNode(" Login")
+                createTextVNode(" Client portal ")
               ];
             }
           }),
           _: 1
         }, _parent));
       }
-      _push(`</div><button class="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" data-v-22556cfb>`);
+      _push(`</div><button type="button" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-700 shadow-sm transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 md:hidden" data-v-e9ae0a52>`);
       if (!showMobileMenu.value) {
-        _push(`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-7 w-7 text-gray-700 dark:text-gray-300" data-v-22556cfb><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" data-v-22556cfb></path></svg>`);
+        _push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" data-v-e9ae0a52><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" data-v-e9ae0a52></path></svg>`);
       } else {
-        _push(`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-7 w-7 text-gray-700 dark:text-gray-300" data-v-22556cfb><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" data-v-22556cfb></path></svg>`);
+        _push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" data-v-e9ae0a52><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" data-v-e9ae0a52></path></svg>`);
       }
-      _push(`</button></nav>`);
+      _push(`</button></div></nav>`);
       if (showMobileMenu.value) {
-        _push(`<div class="md:hidden mt-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 z-50" data-v-22556cfb><ul class="flex flex-col gap-4" data-v-22556cfb><!--[-->`);
+        _push(`<div class="section-shell mt-2 mb-4 space-y-4 rounded-2xl border border-slate-100 bg-white/95 p-4 text-sm shadow-lg dark:border-slate-700 dark:bg-slate-900/95 md:hidden" data-v-e9ae0a52><ul class="flex flex-col gap-2" data-v-e9ae0a52><!--[-->`);
         ssrRenderList(navigationLinks, (link) => {
-          _push(`<li data-v-22556cfb>`);
+          _push(`<li data-v-e9ae0a52>`);
           if (link.scrollTo) {
-            _push(`<button class="${ssrRenderClass([{ "bg-blue-50 dark:bg-emerald-900 text-green-700 dark:text-emerald-300 font-bold": isActive(link) }, "flex items-center gap-1 w-full text-lg font-medium px-2 py-2 rounded transition-colors duration-200 text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-white"])}" data-v-22556cfb>`);
-            if (link.icon) {
-              _push(`<span class="text-xl" data-v-22556cfb>${ssrInterpolate(link.icon)}</span>`);
-            } else {
-              _push(`<!---->`);
-            }
-            _push(` ${ssrInterpolate(link.label)}</button>`);
+            _push(`<button class="${ssrRenderClass([isActive(link) ? "bg-brand-green/10 text-brand-green dark:bg-brand-green/15" : "hover:bg-slate-100 dark:hover:bg-slate-800", "flex w-full items-center justify-between rounded-xl px-3 py-2 text-left transition-colors"])}" data-v-e9ae0a52><span class="inline-flex items-center gap-2" data-v-e9ae0a52><span class="${ssrRenderClass([link.tint, "h-1.5 w-1.5 rounded-full bg-gradient-to-br"])}" data-v-e9ae0a52></span><span data-v-e9ae0a52>${ssrInterpolate(link.label)}</span></span></button>`);
           } else {
             _push(ssrRenderComponent(_component_NuxtLink, {
               to: link.to,
-              class: ["flex items-center gap-1 text-lg font-medium px-2 py-2 rounded transition-colors duration-200 text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-white", { "bg-blue-50 dark:bg-emerald-900 text-green-700 dark:text-emerald-300 font-bold": isActive(link) }],
+              class: ["flex w-full items-center justify-between rounded-xl px-3 py-2 text-left transition-colors", isActive(link) ? "bg-brand-green/10 text-brand-green dark:bg-brand-green/15" : "hover:bg-slate-100 dark:hover:bg-slate-800"],
               onClick: ($event) => showMobileMenu.value = false
             }, {
               default: withCtx((_, _push2, _parent2, _scopeId) => {
                 if (_push2) {
-                  if (link.icon) {
-                    _push2(`<span class="text-xl" data-v-22556cfb${_scopeId}>${ssrInterpolate(link.icon)}</span>`);
-                  } else {
-                    _push2(`<!---->`);
-                  }
-                  _push2(` ${ssrInterpolate(link.label)}`);
+                  _push2(`<span class="inline-flex items-center gap-2" data-v-e9ae0a52${_scopeId}><span class="${ssrRenderClass([link.tint, "h-1.5 w-1.5 rounded-full bg-gradient-to-br"])}" data-v-e9ae0a52${_scopeId}></span><span data-v-e9ae0a52${_scopeId}>${ssrInterpolate(link.label)}</span></span>`);
                 } else {
                   return [
-                    link.icon ? (openBlock(), createBlock("span", {
-                      key: 0,
-                      class: "text-xl"
-                    }, toDisplayString(link.icon), 1)) : createCommentVNode("", true),
-                    createTextVNode(" " + toDisplayString(link.label), 1)
+                    createVNode("span", { class: "inline-flex items-center gap-2" }, [
+                      createVNode("span", {
+                        class: ["h-1.5 w-1.5 rounded-full bg-gradient-to-br", link.tint]
+                      }, null, 2),
+                      createVNode("span", null, toDisplayString(link.label), 1)
+                    ])
                   ];
                 }
               }),
@@ -1801,21 +1971,42 @@ const _sfc_main$3 = {
           }
           _push(`</li>`);
         });
-        _push(`<!--]--></ul><div class="mt-4" data-v-22556cfb>`);
-        if (user.value && user.value.username) {
-          _push(`<span class="block px-4 py-2 rounded bg-green-500 text-white font-semibold text-center" data-v-22556cfb>${ssrInterpolate(user.value.username)}</span>`);
+        _push(`<!--]--></ul><div class="flex items-center justify-between pt-2 flex-col gap-2 w-full" data-v-e9ae0a52>`);
+        if (unref(user) && unref(user).username) {
+          _push(`<!--[--><div class="flex items-center gap-2 w-full justify-between" data-v-e9ae0a52><span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-semibold text-brand-green" data-v-e9ae0a52>${ssrInterpolate(unref(user).username)}</span><button type="button" class="text-xs font-medium text-red-500 hover:text-red-600" data-v-e9ae0a52> Sign out </button></div>`);
+          if (unref(user).role === "admin") {
+            _push(ssrRenderComponent(_component_NuxtLink, {
+              to: "/admin",
+              class: "w-full text-center rounded-lg bg-emerald-100/50 dark:bg-emerald-900/30 px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors",
+              onClick: ($event) => showMobileMenu.value = false
+            }, {
+              default: withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  _push2(` Admin Dashboard `);
+                } else {
+                  return [
+                    createTextVNode(" Admin Dashboard ")
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent));
+          } else {
+            _push(`<!---->`);
+          }
+          _push(`<!--]-->`);
         } else {
           _push(ssrRenderComponent(_component_NuxtLink, {
             to: "/login",
-            class: "block px-4 py-2 rounded bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors duration-200 text-center",
+            class: "w-full text-center rounded-full bg-gradient-to-r from-brand-green to-brand-orange px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:shadow-md",
             onClick: ($event) => showMobileMenu.value = false
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`Login`);
+                _push2(` Client portal `);
               } else {
                 return [
-                  createTextVNode("Login")
+                  createTextVNode(" Client portal ")
                 ];
               }
             }),
@@ -1836,7 +2027,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/landing/LandingHeader.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const __nuxt_component_0 = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-22556cfb"]]);
+const __nuxt_component_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-e9ae0a52"]]);
 const RouteProvider = defineComponent({
   props: {
     vnode: {
@@ -1980,10 +2171,13 @@ const _sfc_main$2 = {
   __name: "app",
   __ssrInlineRender: true,
   setup(__props) {
+    useAuth();
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_LandingHeader = __nuxt_component_0;
+      const _component_NuxtRouteAnnouncer = __nuxt_component_0;
+      const _component_LandingHeader = __nuxt_component_1$1;
       const _component_NuxtPage = __nuxt_component_1;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
+      _push(ssrRenderComponent(_component_NuxtRouteAnnouncer, null, null, _parent));
       _push(ssrRenderComponent(_component_LandingHeader, null, null, _parent));
       _push(ssrRenderComponent(_component_NuxtPage, null, null, _parent));
       _push(`</div>`);
@@ -2017,8 +2211,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-Cn4fSYfq.mjs').then((r) => r.default || r));
-    const _Error = defineAsyncComponent(() => import('./error-500-mmnpXLtO.mjs').then((r) => r.default || r));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-vpx9M0f6.mjs').then((r) => r.default || r));
+    const _Error = defineAsyncComponent(() => import('./error-500-D5szlIjC.mjs').then((r) => r.default || r));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -2099,5 +2293,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { _export_sfc as _, __nuxt_component_0$1 as a, __nuxt_component_1 as b, useNuxtApp as c, asyncDataDefaults as d, entry$1 as default, createError as e, useAppConfig as f, appConfig as g, useState as h, mergeConfig as m, useHead as u };
+export { _export_sfc as _, __nuxt_component_0$1 as a, useRouter as b, useAuth as c, __nuxt_component_1 as d, entry$1 as default, useNuxtApp as e, asyncDataDefaults as f, createError as g, defineNuxtRouteMiddleware as h, useAppConfig as i, useState as j, navigateTo as n, useHead as u };
 //# sourceMappingURL=server.mjs.map

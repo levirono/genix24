@@ -1,10 +1,10 @@
 import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'vue-bundle-renderer/runtime';
-import { u as useRuntimeConfig, e as eventHandler, s as setResponseHeader, a as send, g as getResponseStatus, b as setResponseStatus, f as useNitroApp, h as setResponseHeaders, j as joinRelativeURL, i as getQuery, c as createError, k as getRouteRules, l as getResponseStatusText } from '../runtime.mjs';
+import { u as useRuntimeConfig, e as eventHandler, s as setResponseHeader, a as send, g as getResponseStatus, b as setResponseStatus, c as useNitroApp, f as setResponseHeaders, j as joinRelativeURL, h as getQuery, i as createError, k as getRouteRules, l as getResponseStatusText } from '../runtime.mjs';
 import { stringify, uneval } from 'devalue';
 import { renderToString } from 'vue/server-renderer';
 import { propsToString, renderSSRHead } from '@unhead/ssr';
 import { createServerHead as createServerHead$1, CapoPlugin } from 'unhead';
-import { version, unref } from 'vue';
+import { unref, version } from 'vue';
 import { defineHeadPlugin } from '@unhead/shared';
 
 function defineRenderHandler(handler) {
@@ -36,6 +36,21 @@ function defineRenderHandler(handler) {
     }
     return response.body;
   });
+}
+
+function baseURL() {
+  return useRuntimeConfig().app.baseURL;
+}
+function buildAssetsDir() {
+  return useRuntimeConfig().app.buildAssetsDir;
+}
+function buildAssetsURL(...path) {
+  return joinRelativeURL(publicAssetsURL(), buildAssetsDir(), ...path);
+}
+function publicAssetsURL(...path) {
+  const app = useRuntimeConfig().app;
+  const publicBase = app.cdnURL || app.baseURL;
+  return path.length ? joinRelativeURL(publicBase, ...path) : publicBase;
 }
 
 const Vue3 = version.startsWith("3");
@@ -96,7 +111,7 @@ const unheadPlugins = true ? [CapoPlugin({ track: true })] : [];
 
 const renderSSRHeadOptions = {"omitLineBreaks":false};
 
-const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"}],"link":[],"style":[],"script":[],"noscript":[],"title":"Genixl"};
+const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"description","content":"Genixl - Innovative solutions for your business. Discover our services, products, and core values."},{"name":"color-scheme","content":"light dark"},{"property":"og:title","content":"Genixl"},{"property":"og:description","content":"Genixl - Innovative solutions for your business. Discover our services, products, and core values."},{"property":"og:type","content":"website"},{"property":"og:image","content":"/images/genixl.jpg"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:title","content":"Genixl"},{"name":"twitter:description","content":"Genixl - Innovative solutions for your business."},{"name":"twitter:image","content":"/images/genixl.jpg"}],"link":[{"rel":"preconnect","href":"https://fonts.googleapis.com"},{"rel":"preconnect","href":"https://fonts.gstatic.com","crossorigin":""},{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"}],"style":[],"script":[],"noscript":[],"title":"Genixl"};
 
 const appRootTag = "div";
 
@@ -107,21 +122,6 @@ const appTeleportTag = "div";
 const appTeleportAttrs = {"id":"teleports"};
 
 const componentIslands = false;
-
-function baseURL() {
-  return useRuntimeConfig().app.baseURL;
-}
-function buildAssetsDir() {
-  return useRuntimeConfig().app.buildAssetsDir;
-}
-function buildAssetsURL(...path) {
-  return joinRelativeURL(publicAssetsURL(), buildAssetsDir(), ...path);
-}
-function publicAssetsURL(...path) {
-  const app = useRuntimeConfig().app;
-  const publicBase = app.cdnURL || app.baseURL;
-  return path.length ? joinRelativeURL(publicBase, ...path) : publicBase;
-}
 
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;
@@ -406,5 +406,5 @@ const renderer$1 = /*#__PURE__*/Object.freeze({
   default: renderer
 });
 
-export { buildAssetsURL as a, baseURL as b, publicAssetsURL as p, renderer$1 as r };
+export { baseURL as b, renderer$1 as r };
 //# sourceMappingURL=renderer.mjs.map

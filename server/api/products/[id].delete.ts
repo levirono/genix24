@@ -1,4 +1,4 @@
-import { getSupabase, handleDatabaseError } from '../utils/supabase'
+import { getSupabase, handleDatabaseError } from '../../utils/supabase'
 
 export default defineEventHandler(async (event) => {
   if (event.req.method !== 'DELETE') {
