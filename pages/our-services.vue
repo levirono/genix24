@@ -1,16 +1,18 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-brand-surfaceLight via-white to-brand-surfaceLight dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
     <section class="section-shell py-16 space-y-10">
-      <header class="max-w-3xl space-y-4">
+      <header class="max-w-4xl mx-auto text-center space-y-4">
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
           Services
         </p>
-        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-          Everything you need to design, build, and run modern software.
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl md:text-5xl">
+          <span class="bg-gradient-to-r from-brand-green via-brand-orange to-brand-blue bg-clip-text text-transparent">
+            Everything you need
+          </span>
+          to design, build, and run modern software.
         </h1>
-        <p class="text-sm text-slate-600 dark:text-slate-300">
-          Our services are organised into streams so you can start where it makes the most sense: shaping a new
-          product, unblocking a team, or modernising an existing platform.
+        <p class="mx-auto max-w-2xl text-sm text-slate-600 dark:text-slate-300">
+          Our services organised into streams. Start where it makes sense: shaping a new product, unblocking a team, or modernising an existing platform.
         </p>
       </header>
 
@@ -49,47 +51,32 @@
 <script setup lang="ts">
 const streams = [
   {
-    title: 'Product strategy and discovery',
+    title: 'Web platforms',
     description:
-      'Clarify problems, align stakeholders, and turn ideas into a validated, prioritised roadmap backed by prototypes.',
-    items: ['User and stakeholder interviews', 'Journey mapping and opportunity framing', 'Low‑fidelity prototypes and testing'],
+      'Marketing sites, dashboards, and B2B portals tailored to your workflows and business goals.',
+    items: ['Marketing and corporate websites', 'Dashboards and internal tools', 'B2B portals and web applications'],
     accent: 'pill-bullet--green',
   },
   {
-    title: 'Experience and interface design',
+    title: 'Mobile apps',
     description:
-      'Design systems, interaction patterns, and screen flows that feel intentional across web and mobile.',
-    items: ['Design systems and tokens', 'Responsive layouts and components', 'Accessible, production‑ready specs'],
+      'Product-grade iOS and Android experiences built from a single codebase for speed and consistency.',
+    items: ['iOS and Android application development', 'Cross-platform solutions', 'App maintenance and updates'],
     accent: 'pill-bullet--orange',
   },
   {
-    title: 'Full‑stack engineering',
+    title: 'Software installation and maintenance',
     description:
-      'Hands‑on engineering teams that can own features from API design to polished frontends and deployments.',
-    items: ['Web and mobile application development', 'API and integration work', 'Testing, monitoring, and observability'],
+      'Reliable setup, configuration, and ongoing maintenance of software systems to keep your operations running smoothly.',
+    items: ['Software setup and configuration', 'Ongoing maintenance and support', 'Performance monitoring and updates'],
     accent: 'pill-bullet--blue',
   },
   {
-    title: 'Cloud, DevOps, and reliability',
+    title: 'Consulting',
     description:
-      'Set up or improve the infrastructure that keeps your software fast, secure, and easy to ship.',
-    items: ['Cloud architecture and infrastructure as code', 'CI/CD pipelines and release automation', 'Performance and security reviews'],
+      'Expert guidance on software strategy, system design, and technology choices to help you make informed decisions.',
+    items: ['Software strategy and roadmapping', 'System design and architecture review', 'Technology selection and advisory'],
     accent: 'pill-bullet--green',
-  },
-  {
-    title: 'Data and analytics enablement',
-    description:
-      'Make better decisions with instrumentation, dashboards, and experimentation that your team can actually use.',
-    items: ['Event tracking and analytics setup', 'Product and growth dashboards', 'Experimentation frameworks'],
-    accent: 'pill-bullet--orange',
-  },
-  {
-    title: 'Advisory and team enablement',
-    description:
-      'Coaching and architecture support for teams that want to level up their own engineering practices.',
-    items: ['Architecture and codebase reviews', 'Pairing and technical leadership', 'Hiring and onboarding support'],
-    accent: 'pill-bullet--blue',
   },
 ]
 </script>
-

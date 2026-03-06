@@ -1,16 +1,18 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-brand-surfaceLight via-white to-brand-surfaceLight dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
     <section class="section-shell py-16 space-y-12">
-      <header class="max-w-3xl space-y-4">
+      <header class="max-w-4xl mx-auto text-center space-y-4">
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue">
           Industries & teams
         </p>
-        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-          How we partner with product, engineering, and operations leaders.
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl md:text-5xl">
+          How we partner with
+          <span class="bg-gradient-to-r from-brand-blue via-brand-green to-brand-orange bg-clip-text text-transparent">
+            product, engineering, and operations leaders.
+          </span>
         </h1>
-        <p class="text-sm text-slate-600 dark:text-slate-300">
-          We tend to work with teams that have clear goals but limited time or capacity to execute. Our role is to
-          provide a stable product squad that can plug into your context and start shipping with minimal overhead.
+        <p class="mx-auto max-w-2xl text-sm text-slate-600 dark:text-slate-300">
+          We work with teams that have clear goals but need execution capacity. Our role is to provide a stable product squad that plugs in and ships with minimal overhead.
         </p>
       </header>
 

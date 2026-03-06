@@ -1,16 +1,18 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-brand-surfaceLight via-white to-brand-surfaceLight dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
     <section class="section-shell py-16 space-y-12">
-      <header class="max-w-3xl space-y-4">
+      <header class="max-w-4xl mx-auto text-center space-y-4">
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-orange">
           Products
         </p>
-        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-          Focused tools created and maintained by the Genixl team.
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl md:text-5xl">
+          <span class="bg-gradient-to-r from-brand-orange via-brand-blue to-brand-green bg-clip-text text-transparent">
+            Focused tools
+          </span>
+          created and maintained by the Genixl team.
         </h1>
-        <p class="text-sm text-slate-600 dark:text-slate-300">
-          These products are shaped by work we do with clients. Each one is designed to solve a clear problem in
-          mobility, operations, or engineering workflow — and can be integrated into your own stack.
+        <p class="mx-auto max-w-2xl text-sm text-slate-600 dark:text-slate-300">
+          Products shaped by real client work. Each one solves a clear problem in mobility, operations, or engineering workflow.
         </p>
       </header>
 

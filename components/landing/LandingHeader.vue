@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 z-40 border-b border-white/10 bg-white/80 backdrop-blur-md dark:bg-slate-900/80">
-    <nav class="section-shell flex items-center justify-between py-3">
+    <nav class="section-shell flex items-center justify-between py-2 sm:py-3">
       <NuxtLink to="/" class="flex items-center gap-3">
         <img
           src="/images/genixl2.png"
